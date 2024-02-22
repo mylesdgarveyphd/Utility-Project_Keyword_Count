@@ -1,0 +1,185 @@
+Skip to HeaderSkip to SearchSkip to ContentSkip to Footer
+Skip to main content
+MicrosoftResearch 
+
+ Return to Blog Home
+Microsoft Research Blog
+Phi-2: The surprising power of small language models
+Published December 12, 2023
+
+By Mojan Javaheripi , Senior Researcher  Sébastien Bubeck , Vice President, Microsoft GenAI
+
+Share this page
+
+Share on Facebook
+Share on Twitter
+Share on LinkedIn
+Share on Reddit
+Subscribe to our RSS feed
+Contributors
+Marah Abdin, Jyoti Aneja, Sebastien Bubeck, Caio César Teodoro Mendes, Weizhu Chen, Allie Del Giorno, Ronen Eldan, Sivakanth Gopi, Suriya Gunasekar, Mojan Javaheripi, Piero Kauffmann, Yin Tat Lee, Yuanzhi Li, Anh Nguyen, Gustavo de Rosa, Olli Saarikivi, Adil Salim, Shital Shah, Michael Santacroce, Harkirat Singh Behl, Adam Taumann Kalai, Xin Wang, Rachel Ward, Philipp Witte, Cyril Zhang, Yi Zhang
+
+Satya Nadella on stage at Microsoft Ignite 2023 announcing Phi-2.
+Figure 1. Satya Nadella announcing Phi-2 at Microsoft Ignite 2023.
+Over the past few months, our Machine Learning Foundations team at Microsoft Research has released a suite of small language models (SLMs) called “Phi” that achieve remarkable performance on a variety of benchmarks. Our first model, the 1.3 billion parameter Phi-1(opens in new tab), achieved state-of-the-art performance on Python coding among existing SLMs (specifically on the HumanEval and MBPP benchmarks). We then extended our focus to common sense reasoning and language understanding and created a new 1.3 billion parameter model named Phi-1.5(opens in new tab), with performance comparable to models 5x larger.
+
+We are now releasing Phi-2(opens in new tab), a 2.7 billion-parameter language model that demonstrates outstanding reasoning and language understanding capabilities, showcasing state-of-the-art performance among base language models with less than 13 billion parameters. On complex benchmarks Phi-2 matches or outperforms models up to 25x larger, thanks to new innovations in model scaling and training data curation.
+
+With its compact size, Phi-2 is an ideal playground for researchers, including for exploration around mechanistic interpretability, safety improvements, or fine-tuning experimentation on a variety of tasks. We have made Phi-2(opens in new tab) available in the Azure AI Studio model catalog to foster research and development on language models.
+
+MICROSOFT RESEARCH PODCAST
+
+
+Collaborators: Holoportation™ communication technology with Spencer Fowers and Kwame Darko
+Spencer Fowers and Kwame Darko break down how the technology behind Holoportation and the telecommunication device being built around it brings patients and doctors together when being in the same room isn’t an easy option and discuss the potential impact of the work.
+
+Listen now
+Opens in a new tab
+Key Insights Behind Phi-2
+The massive increase in the size of language models to hundreds of billions of parameters has unlocked a host of emerging capabilities that have redefined the landscape of natural language processing. A question remains whether such emergent abilities can be achieved at a smaller scale using strategic choices for training, e.g., data selection.
+
+Our line of work with the Phi models aims to answer this question by training SLMs that achieve performance on par with models of much higher scale (yet still far from the frontier models). Our key insights for breaking the conventional language model scaling laws with Phi-2 are twofold:
+
+Firstly, training data quality plays a critical role in model performance. This has been known for decades, but we take this insight to its extreme by focusing on “textbook-quality” data, following upon our prior work “Textbooks Are All You Need.” Our training data mixture contains synthetic datasets specifically created to teach the model common sense reasoning and general knowledge, including science, daily activities, and theory of mind, among others. We further augment our training corpus with carefully selected web data that is filtered based on educational value and content quality. Secondly, we use innovative techniques to scale up, starting from our 1.3 billion parameter model, Phi-1.5, and embedding its knowledge within the 2.7 billion parameter Phi-2. This scaled knowledge transfer not only accelerates training convergence but shows clear boost in Phi-2 benchmark scores.
+
+A bar plot comparing the performance of Phi-2 (with 2.7B parameters) and Phi-1.5 (with 1.3B parameters) on common sense reasoning, language understanding, math, coding, and the Bigbench-hard benchmark. Phi-2 outperforms Phi1.5 in all categories. The commonsense reasoning tasks are PIQA, WinoGrande, ARC easy and challenge, and SIQA. The language understanding tasks are HellaSwag, OpenBookQA, MMLU, SQuADv2, and BoolQ. The math task is GSM8k, and coding includes the HumanEval and MBPP benchmarks. 
+Figure 2. Comparison between Phi-2 (2.7B) and Phi-1.5 (1.3B) models. All tasks are evaluated in 0-shot except for BBH and MMLU which use 3-shot CoT and 5-shot, respectively.
+Training Details
+Phi-2 is a Transformer-based model with a next-word prediction objective, trained on 1.4T tokens from multiple passes on a mixture of Synthetic and Web datasets for NLP and coding. The training for Phi-2 took 14 days on 96 A100 GPUs. Phi-2 is a base model that has not undergone alignment through reinforcement learning from human feedback (RLHF), nor has it been instruct fine-tuned. Despite this, we observed better behavior with respect to toxicity and bias compared to existing open-source models that went through alignment (see Figure 3). This is in line with what we saw in Phi-1.5 due to our tailored data curation technique, see our previous tech report(opens in new tab) for more details on this. For more information about the Phi-2 model, please visit Azure AI | Machine Learning Studio(opens in new tab).
+
+A barplot comparing the safety score of Phi-1.5, Phi-2, and Llama-7B models on 13 categories of the ToxiGen benchmark. Phi-1.5 achieves the highest score on all categories, Phi-2 achieves the second-highest scores and Llama-7B achieves the lowest scores across all categories. 
+Figure 3. Safety scores computed on 13 demographics from ToxiGen. A subset of 6541 sentences are selected and scored between 0 to 1 based on scaled perplexity and sentence toxicity. A higher score indicates the model is less likely to produce toxic sentences compared to benign ones.
+Phi-2 Evaluation
+Below, we summarize Phi-2 performance on academic benchmarks compared to popular language models. Our benchmarks span several categories, namely, Big Bench Hard (BBH) (3 shot with CoT), commonsense reasoning (PIQA, WinoGrande, ARC easy and challenge, SIQA), language understanding (HellaSwag, OpenBookQA, MMLU (5-shot), SQuADv2 (2-shot), BoolQ), math (GSM8k (8 shot)), and coding (HumanEval, MBPP (3-shot)).
+
+With only 2.7 billion parameters, Phi-2 surpasses the performance of Mistral and Llama-2 models at 7B and 13B parameters on various aggregated benchmarks. Notably, it achieves better performance compared to 25x larger Llama-2-70B model on muti-step reasoning tasks, i.e., coding and math. Furthermore, Phi-2 matches or outperforms the recently-announced Google Gemini Nano 2, despite being smaller in size.
+
+Of course, we acknowledge the current challenges with model evaluation, and that many public benchmarks might leak into the training data. For our first model, Phi-1, we did an extensive decontamination study to discard this possibility, which can be found in our first report “Textbooks Are All You Need.” Ultimately, we believe that the best way to judge a language model is to test it on concrete use cases. Following that spirit, we also evaluated Phi-2 using several Microsoft internal proprietary datasets and tasks, comparing it again to Mistral and Llama-2. We observed similar trends, i.e. on average, Phi-2 outperforms Mistral-7B, and the latter outperforms the Llama-2 models (7B, 13B, and 70B).
+
+Model	Size	BBH	Commonsense
+Reasoning	Language
+Understanding	Math	Coding
+Llama-2	7B	40.0	62.2	56.7	16.5	21.0
+13B	47.8	65.0	61.9	34.2	25.4
+70B	66.5	69.2	67.6	64.1	38.3
+Mistral	7B	57.2	66.4	63.7	46.4	39.4
+Phi-2	2.7B	59.2	68.8	62.0	61.1	53.7
+Table 1. Averaged performance on grouped benchmarks compared to popular open-source SLMs.
+Model	Size	BBH	BoolQ	MBPP	MMLU
+Gemini Nano 2	3.2B	42.4	79.3	27.2	55.8
+Phi-2	2.7B	59.3	83.3	59.1	56.7
+Table 2. Comparison between Phi-2 and Gemini Nano 2 Model on Gemini’s reported benchmarks.
+In addition to these benchmarks, we also performed extensive testing on commonly used prompts from the research community. We observed a behavior in accordance with the expectation we had given the benchmark results. For example, we tested a prompt used to probe a model’s ability to solve physics problems, most recently used to evaluate the capabilities of the Gemini Ultra model, and achieved the following result:
+
+An example prompt is given to Phi-2 which says “A skier slides down a frictionless slope of height 40m and length 80m. What's the skier’s speed at the bottom?”. Phi-2 then answers the prompt by explaining the conversion of potential energy to kinetic energy and providing the formulas to compute each one. It then proceeds to compute the correct speed using the energy formulas. 
+Figure 4. Phi-2’s output on a simple physics problem, which includes an approximately correct square root calculation.
+The model is then provided with a student’s wrong answer to the skier physics problem and asked if it can correct the student’s mistake. Phi-2 replies with the student’s mistake, i.e., using the wrong formula for potential energy, and provides the correct formula. 
+Figure 5. Similarly to Gemini’s test we also further queried Phi-2 with a student’s wrong answer to see if Phi-2 could identify where the mistake is (it did, despite Phi-2 being not fine-tuned for chat or instruction-following). We note however that it is not fully an apple-to-apple comparison with the Gemini Ultra’s output described in the Gemini report, in particular in the latter case the student’s answer was given as an image with handwritten text rather than raw text in our case.
+Opens in a new tab
+Related publications
+Textbooks Are All You Need II: phi-1.5 technical report
+Textbooks Are All You Need
+Meet the authors
+Portrait of Mojan Javaheripi
+Mojan Javaheripi
+Senior Researcher
+
+Learn more
+Portrait of Sébastien Bubeck
+Sébastien Bubeck
+Vice President, Microsoft GenAI
+
+Learn more
+Continue reading
+three conversation bubbles on a blue, purple, and pink gradient background
+December 12, 2023
+Steering at the Frontier: Extending the Power of Prompting 
+EMNLP 2023 logo to the left of accepted paper "LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models" on a blue/green gradient background
+December 7, 2023
+LLMLingua: Innovating LLM efficiency with prompt compression 
+Orca-2 blog hero | abstract waves of data
+November 20, 2023
+Orca 2: Teaching Small Language Models How to Reason 
+White line icons on a blue and green gradient background
+October 16, 2023
+DecodingTrust: A Comprehensive Assessment of Trustworthiness in GPT Models 
+See all blog posts
+Research Areas
+Artificial intelligence
+Related tools
+Phi-2
+Related events
+NeurIPS 2023
+Follow us: 
+Follow on Twitter 
+Like on Facebook
+ 
+Follow on LinkedIn
+ 
+Subscribe on Youtube
+ 
+Follow on Instagram
+ 
+Subscribe to our RSS feed
+Share this page: 
+Share on Twitter 
+Share on Facebook
+ 
+Share on LinkedIn 
+Share on Reddit
+What's new
+Surface Laptop Studio 2
+Surface Laptop Go 3
+Surface Pro 9
+Surface Laptop 5
+Surface Studio 2+
+Copilot in Windows
+Microsoft 365
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Microsoft Store Promise
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+Azure for students
+Business
+Microsoft Cloud
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Industry
+Small Business
+Developer & IT
+Azure
+Developer Center
+Documentation
+Microsoft Learn
+Microsoft Tech Community
+Azure Marketplace
+AppSource
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+Your Privacy Choices
+Sitemap Contact Microsoft Privacy Terms of use Trademarks Safety & eco Recycling About our ads © Microsoft 2024

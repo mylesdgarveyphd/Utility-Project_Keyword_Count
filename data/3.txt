@@ -1,0 +1,273 @@
+
+Free LLM Observability Courses | Enroll now!
+
+Arize AI Logo
+
+SallyAnn DeLucia and Aman Khan
+Phi-2 Model
+Published Jan 31, 2024
+
+Sarah Welsh
+Contributor
+Introduction
+With only 2.7 billion parameters, Phi-2 surpasses the performance of Mistral and Llama-2 models at 7B and 13B parameters on various aggregated benchmarks. Notably, it achieves better performance compared to 25x larger Llama-2-70B model on multi-step reasoning tasks, i.e., coding and math. Furthermore, Phi-2 matches or outperforms the recently-announced Google Gemini Nano 2, despite being smaller in size. In this week’s paper read, we dive into Phi-2 and some of the major differences and use cases for a small language model (SLM) versus an LLM.
+
+Watch
+
+
+Dive in:
+
+More about Phi-2
+See more paper readings
+Listen:
+
+
+Transcript
+Aman Khan: Okay, and we’ll just give it a few minutes for folks to join
+
+SallyAnn DeLucia: perfect. Happy Wednesday.
+
+Aman Khan: Looks like we have a few folks joining cool, I think. In the meantime we can just sort of do quick introductions. In case this is your first time joining one of these, my name is Aman. I’m a Group Product Manager at Arize. Kind of leaning into our LLM product line, and I’m joined by SallyAnn. Sally, do you want to give a brief intro about yourself?
+
+SallyAnn DeLucia: Yeah, hey, everyone. My name’s SallyAnn. I’m a customer success engineer here at Arize. I work with teams supporting and onboarding, all different use cases from LLMs to your traditional and all use cases. So great to be here with you today, Aman.
+
+What is a Small Language Model? Overview of Phi-2
+
+Aman Khan: Awesome. Yeah. And SallyAnn leans in a ton on the product side, too. So it’s gonna be fun for us to kind of take a bit of a technical break. But also, I think we’re gonna do this one a little bit differently than some of our previous paper readings. So we will go through the technical report, and breaking down technically the model that we’re going to be focusing on today. But we’ll also make it a little bit…you can kind of think of it as like, almost like a practical…how do I actually take the learnings from this and actually deploy them in my own environment? Or kind of play around with some of the models that we’re gonna be showing. 
+
+So with that, let me share my screen. As always, if you have any questions, feel free to drop them in the chat, and the Q&A section will be taking questions directly from their live as well. I’m happy to pause at any point.
+
+So today, we’re gonna be focusing on SLMs or small language models versus LLMs, and we’re going to be talking specifically about Phi-2. This is a relatively new small language model. And we’ll talk about the definitions and what we mean by SLM and LLM, and we’ll maybe use a couple of examples to illustrate.
+
+Phi-2 was released by Microsoft in December. It’s an open source model MIT license. They posted it for folks to use a kind of fully open source. So pretty awesome to see this type of research entering the public, and kind of think of it as comparable to a LLama 70 or a Mixtral Mistral model. But we’ll get into the nuances of what’s actually different about this model. 
+
+So we’ll be covering a little bit of an overview of SLMs versus LLMs, what are the differences between the two? What makes Phi 2 exciting? Some of the paper takeaways a little bit around evaluations of course, and then we’ll actually do a bit of a practical example of deploying an Slm locally, and what that means.
+
+SallyAnn, do you want to kick us off with a little bit of a primer on SLMs and LLMs.
+
+SallyAnn DeLucia: yeah, so for the last year or year and a half we’ve been hearing so much about Lms. They take up a lot of our time. 
+
+In the last few months there’s been this emergence of the small language model.
+
+So I think it’s important to kind of talk about the differences between these two. Both are very useful for applications. But there are some nuanced differences. 
+
+So starting with the small language models one key thing about these is that they’re trainable with a lot less data. So looking at Phi-2, I believe it was like a 140 billion tokens, something like that. And then, when you look at GPT-4 it’s in the trillions. So a lot less data is actually needed to train these models, and they’re also a lot smaller. Phi-2 is about I believe it’s what 2.7 billion parameters. So it’s quite smaller than some of our bigger models. And, generally speaking, there’s a wide range of these small language models. You have some that are 100 million parameters. Some that can be, you know, 13 billion parameters, so they’re just a lot smaller in size. And because of that, they can be deployed locally. So that’s something that Aman is gonna cover later on. But that’s a super cool aspect of these small language models. That means they could be potentially deployed on the edge, which is super cool. And it’s definitely not possible for your large language models. They’re really easy to fine tune for specialized tasks. And they’re best for those simple tasks with a narrow domain. 
+
+So that’s a little bit about the SLMs, and then for large language models, you all might be a little bit more familiar with these, but I’ll cover it, anyway. So these are trained on larger data sets. They have tens of billions, parameters, very large memory compute requirements because of their size, and because of that, they’re going to require substantial infrastructure for you to deploy them. They do have a larger context window which is helpful for some tasks, and that’s something that is sometimes seen as an edge over the small language models. But it really does determine, or is determined by what task you’re trying to complete with these models.
+
+Aman Khan: Is it fair to say that you know LLMs are a bit more general purpose, and SLMs are more specific. And is that kind of like one way to think about it, if I was going to pick the right model for the task?
+
+SallyAnn DeLucia: Yeah, I think that’s a good way to think about it. And I think it’s also another way to think about is when you have kind of a simple task that you just don’t require the power or the compute that an LLM is going to give you. That’s another way to kind of think of it. So those smaller, simpler tasks like coding, I think, is a really good kind of example of that.
+
+Aman Khan: Yeah. Got it so like something constrained, something where the bounds are well known, you know you’re not trying to go from like one domain to a different domain like, Okay, now, code in like, you know, eighteenth century German or something like that which maybe a large language model would be able to do, or at least be able to transfer domains quite well. This is going to be more, you know. Kind of specific tasks, you know. Maybe even, you know, if you fine-tuned it specifically on that data as well.
+
+SallyAnn DeLucia: Yep. And it’s perfect for that
+
+So in the Phi-2 blog it talks about the fact that it kind of borrowed from an initial paper that they did, for you know, Phi-1 and Phi- 1.5, which is “Textbooks are All You Need” And what this really focuses on is kind of an idea that we’ve heard throughout machine learning history, which is garbage and garbage out. Their whole premise is that they were able to train a small code model with a small amount of data, and they did this by using a really high quality set of data. So they called it code textbook. That’s where the title comes from–you know, textbook is all you need. And basically the code textbook is comprised of 3 parts of data. So the first one is this filtered code language data set. The second is a synthetic textbook data set. And then the last is the synthetic exercise data set. I’ll talk about these in a little bit more detail on the next slides. 
+
+But the idea is as they really put effort into making sure that the data that they were going to use to train this model was super high quality. So it had just the information that they needed. They were training it for a coding bot. So you know, it’s gotta be able to learn how to code and their whole kind of hypothesis is just a lot of models are suffering from poor quality data in the training data set.
+
+So they aim to improve that by making sure that they kind of took control over what data they were going to use for training. And they found that using a high quality data set, small language models can actually achieve the state of the art performance on these specialized tasks. So in this example, it was coding. But you could do this with any kind of small language model by making sure that you use the high quality data.
+
+And can you go to the next slide, Aman, I can kind of walk through what these examples look like. 
+
+ 
+
+Chart of High educational value versus low educational value
+From Textbooks Are All You Need, Gunasekar, et. al.
+ 
+
+So there are some coding data sets that are used commonly, you know it’s the stack overflow. Those are very common for these coding tasks. And what they found is by doing like a random sample and taking a look at these examples, not all of them are really high in educational value. So these are two examples of what they mean by like high educational value, the one on the
+
+the left. It would be a lot easier for an LLM. Or even a human, to learn how to code. Looking at that example versus the one on the right. And so you could think about it. If it’s gonna be hard for a human to learn from these textbooks examples. It’s definitely going to be hard for an Lm. To live or a small language model even. To learn from these examples. So what they did was they did a combination of kind of manually annotating some of these as well as using GPT–4 to annotate. And what they did is they filtered out those low educational value samples and only included these high educational value samples in their training data set.
+
+That’s the first component of their code textbook data set. The second is the synthetic textbook. So they use an LLM here to generate the short textbooks for coding examples. So this is an example here. It’s defining how to do singular and non singular matrices. And it just includes that little code snippet on exactly how to do this. So there were a number of examples that they did this and I believe they used GPT-3 to generate these synthetic textbooks. This is the second component and so again, making sure these are all high quality. And are going to be the information that they need to fine tune or train their model for that specific task.
+
+Aman Khan: I think it’s kind of interesting, to pause here as well the call out to like synthetic data being used to train this model. But high quality synthetic data with labels with reviewing the data going in using an LLM to do some of the labeling as well in some cases, any thoughts or insights? The code example is pretty interesting. I know we’re going to talk about another one, too. But like you’re right, this is just so much more readable versus, you know, a large language model, you would think, just keep stuffing more and more data, and, like the scaling laws, will sort of work out. But here it’s super curated and even LLM generated synthetic data. So it’s kind of an interesting insight there.
+
+SallyAnn DeLucia: Yeah. And it’s super interesting, too, because what I appreciated was their call out to the fact that you need to ensure that these examples are diverse, and they’re not repetitive, and that’s something that kind of goes against the laws of balance right to a certain degree. They’re built to be very predictable. They give a lot of the same examples over and over again, and use the same kind of verbiage over and over again. And so they actually made it a point to inject some randomness into this, so not only are they having this high quality, but they are diverse, which is going to be really important for any of these or any model that you try to implement this kind of training with.
+
+So I thought that was really interesting and important because that was one of my first thoughts was like, okay, are you just gonna get the same textbook? That’s maybe the same words just rearranged slightly different. Like, how are you going to really mimic what you would get out of like a real textbook and also ensure that, you know, we’re not just kind of exposing this new model to just the same knowledge that the LLM that was used to create the textbook had. So I thought it was a really interesting approach, and I’m glad that they made that call out, because I do think it’s important to be able to kind of reproduce these results.
+
+Aman Khan: Yeah, totally, it feels like a lot more approachable and from a reproducibility perspective than like, just keep shoving data in and and throwing a bunch of compute. 
+
+And then do you want to hit on the last sort of data that they use for coding?
+
+SallyAnn DeLucia: Yeah, absolutely. So this is synthetic code exercises so very similar to that last bit that we just covered. Except here, this is going to be given basically a docstring that the LLM needs to complete you can think of if you have a textbook from college high school, any of those where you’re or even if you’re learning to code now, there’s always exercises in the back of the book that you can work on to see if you can test your knowledge. And so they use a synthetic set of data for that as well. And so again, they use GPT-3.5 for these and they just kind of again tried to make sure that they had a diverse sample so that they could really optimize this training data.
+
+Aman Khan: Yeah, super cool. I almost think that there’s some, I mean, maybe not surprising is the parallels in learning to like human learning as well. Right? So you have your examples, you have your textbook, and then, textbook and code and exercises. So it’s kind of like literally going through like, what does a student need? They need, like the material, the reference material exercises to reinforce and and I think that’s that’s like a really kind of salient point here that if you actually just structure your training data in such a way that it almost resembles what you would want to teach someone or human like that’s that’s kind of you know it kind of maps pretty well to this task as well.
+
+SallyAnn DeLucia absolutely. And I always appreciate when they even put it in that kind of human relationship because it. It makes it almost easier for us to understand how these models are working. And like why this is successful. So pretty cool stuff. 
+
+Aman Khan: Yeah, so filtered code database, synthetic textbooks, synthetic code exercises. This is how they get, you know, pretty interestingly, high performance on coding tasks which will cover in just a sec as well.
+
+So why is Phi-2 exciting? So I think we’ll get into sort of like the, you know the performance of the model as well in just a moment. But, you know the main takeaways from the authors and from the initial sort of benchmarking is the performance is really high. It’s better than a lot of models that have more parameters. Which is sort of, you know, goes. It’s kind of counterintuitive in fact, the papers, or like the blog post. The authors kind of call out, you know, this is sort of  a way of pushing back against scaling laws like you must. You know, the scaling laws like you just keep throwing more data. You’ll get higher performance, more parameters means better performance. This is a little bit counterintuitive in that. It’s actually counter  to what the conventional scaling laws that we’ve kind of known you know, or expected transformers to perform with. 
+
+It makes a really strong case for training with high quality data sets on the knowledge transfer bit, SallyAnn, do you have any kind of note on that piece? 
+
+SallyAnn DeLucia: Yeah so that model we were just talking about that Phi-1.5 that they took or they they worked on with “Textbooks Are All You Need,” they actually did a knowledge transfer into Phi-2 which I thought was really interesting. And they did see some improved performance from 1.5 just after doing that knowledge transfer. So I think this is gonna be a key technique for these small language models is kind of building on their previous progress. And so that I think that’s really just the note there is. That’s something that you’ll see is common–it accelerates training but then it also boosts performance. So I think it’s a key component of these models.
+
+Aman Khan: Yeah. And then I think that the call out to like synthetic data data generation as well as part of the training set is not a first, but it’s a good example. Sort of that reinforces that that would be, you know, wherever we’re going to see more of these efficiency gains of high quality data. You’ll probably want to generate or at least augment your data set with synthetic data as well.
+
+SallyAnn DeLucia: And what’s interesting here, too, is, you know, with the “Textbooks Are All You Need” for Phi-1 and 1.5. That was very specific to coding for Phi-2. They did kind of expand that. So there were examples of reasoning and general knowledge that we’re science. Like daily activities, theory of mind, they. They expanded on that with not using as much of a narrow set of data. So I think it’s kind of interesting to see that even when you expand like the breadth of knowledge that you’re passing in. As long as you kind of adhere to that high quality. It does pay off.
+
+Aman Khan: Yeah, awesome. And then I know you have the contact extension note. And I’m gonna come. I’m actually gonna come back to that in just a moment–what does that mean? You know we mentioned that there’s some one of the limitations of this model is the number of the context window. But there’s some really interesting research going on there as well. So I figure we could just jump into a little bit from the authors themselves, the contributors themselves. And I wanted to call out a couple of interesting things. So at the top. They do mention that, you know, Phi-2 is available in Azure studio model catalog. So you can actually go and download the model directly. Just have to make a I mean you you can get, you know, the hugging face or diversion as well. They do have it up and Hugging Face. But you can get sort of all of the raw files that you need to deploy the model straight from Azure studio. So I thought that was kind of, you know, it was cool that they’re actually pushing towards more of an open source initiative here. It’s MIT license. So it’s actually, you know, you can use it for commercial commercial use as well in that way.
+
+So these were some of the benchmarks. So here, they’re comparing Phi-1.5, which is 1.3 billion parameters to Phi-2 at 2.7 billion. So they are doubling the number of parameters. But you know, you see that boost and obviously like the math encoding tasks. And that’s where we’re hitting home on a lot of the training data. But also, if you expand that breath of knowledge or expand that breath of, you know information that you’re sort of encoding in the model, you’ll see improvements in the sort of reasoning and language understanding tasks.
+
+So this was kind of interesting to me as well. The training for Phi-2 took 14 days on 96 A100 GPUs. Obviously, that’s a significant rig. But I do think that from a research lab perspective, it feels in some way like high quality very well optimized training as well. So that was kind of impressive. 1.4 trillion tokens the total set. 
+
+I wanted to call this out: So yeah, our key insights for breaking the conventional language model scaling laws with Phi-2 are 2 fold. I mean, they’re sort of like there, that is a bit of a maybe a hot take but it is interesting to sort of see the authors sort of calling out that they’re, you know, trying to. That’s the intention here is trying to break the conventional wisdom around scaling laws. 
+
+SallyAnn DeLucia: It’s interesting to just add one more note to that. Like they are firm on. They believe that one of the key components of that is just that like “Textbooks Are All You Need” like, they give a lot of credit to that being the reason why they’re able to overcome. So I think it’s interesting, and it seems like they’re doubling down on that approach. So I’m excited to see what else comes out of that.
+
+Aman Khan: Yep, and then I almost missed this one. But this was also interesting. So Mistral Mixtral–which we covered a couple of weeks ago–a lot of models now are sort of undergoing RLHF instruction fine-tuning. It was interesting. The Phi-2 did not undergo any alignment. So you can get the base model. You can fine tune it for alignment if you want but it doesn’t come out of that box instruction fine-tuned, which is interesting as well.
+
+And so all of the benchmarks you see, are actually gonna be based on that base model, not even an instruction fine tune model, which is kind of interesting, too. So let’s talk about benchmarks. So the authors make some claims here which are pretty interesting: We evaluate Phi-2 using several Microsoft internal proprietary data sets and tasks.
+
+And they mentioned the textbooks approach and the training data that it is interesting that they use some open source. You know, these are sort of the you know the sort of common sense, reasoning, language, understanding. These are not the math encoding. These are the sort of Microsoft internal proprietary tasks. So that’s you know, for what it’s worth. That’s something to take as it is. That you know these benchmarks are a little bit different than the ones that you might have seen up here with humans as well.
+
+So yeah, interesting, but you know, it depends on how those data sets are curated. But it is cool to see. At least, you know, presumably on the same tasks–you see Phi-2 sort of outperforming missile. You see it outperforming llama to in most cases up until about 70B for so it kind of surpasses 70b and 13b. They do also make a comparison to Gemini Nano to you know, I think I think we’re you know, we kind of covered this in the Gemini paper last week, but it looks like you know, it really depends on a lot of different things around inference and performance of why, you might want to use Gemini Nano 2. But it is interesting that they sort of call out that you know, from the API. It ran it on the same benchmarks as well.
+
+Then the authors go through a couple of examples here like math, almost like math tasks similar to the Gemini example as well like, here’s a math task like, explain, you know what’s going on here. And it does explain a simple physics problem. And you know, from something rather ambiguous, which is, which is pretty cool to see.
+
+Anything else you wanted to add on the paper note SallyAnn if not, maybe we can jump into the deployment piece.
+
+SallyAnn DeLucia: Yeah, I guess the one other thing that I made note of on my end was the fact they mentioned that they didn’t use reinforcement learning from human feedback. And one of the intentions of doing that was so we could provide more research into the like. Vital like safety challenges, like the toxicity report that they put in the blog and just kind of understanding, like the societal biases which I think are really important. And I don’t see a lot of research teams kind of calling that out. So I’m definitely super interested in, you know, AI ethics, and how we can be socially responsible with these models. So it’s cool to see that they’re calling that out. And I’ll definitely be watching to see how researchers take this model and apply it in that specific context.
+
+Aman Khan: Yeah, so that’s in the technical report.
+
+SallyAnn DeLucia: Yeah, I think it’s both here and in the blog, actually, for Phi-2, they mentioned it right where they where they bring up the fact that it’s not using the reinforcement learning from human feedback.
+
+Aman Khan: Yeah. So less of that bias is what you’re what you’re kind of getting at with that point from like humans.
+
+SallyAnn DeLucia: Yeah, you can see, it’s just basically kind of the fact that it’s not restricted because they don’t use that, that reinforcement learning, it’s unrestricted. So it kind of gives researchers a really good opportunity to research into these kind of ethics kind of areas of the model and understand a little bit better about what societal biases exist without that reinforcement, learning how we can enhance controllability and how just we can make sure that our LLMs or SLMs are not responding with toxically.
+
+ 
+
+Q&A
+
+ 
+
+Aman Khan: Yeah and they call out as well as well like the performance on toxicity. So yeah. Seems to perform, you know pretty well on it compared to some other open source models. And that could be because, like you’re saying, like they’re getting, it’s getting high quality data. It’s not being influenced by the bad stuff that you see on the Internet. Oftentimes, from large amounts of data, and other sources that GPT-4 and others are being trained on as well.
+
+Looks like we have a couple of questions. We can take these and then we’ll jump into deployment, which is really exciting. We’ll have a little demo there. 
+
+The first question is: We have LLMs and SLMs, what is the purpose of SLMs? 
+
+What we kind of covered in the beginning is, SLMs have some major benefits to use over Lms in terms of number of parameters and efficiency of the model. They’re much less computationally heavy for things like inference and fine-tuning and then, if you have specific domain tasks, you can get pretty high performance on things like coding or math, depending on the model you want to use. You know. So I highly recommend checking out the paper. That sort of makes that case as well.
+
+And then Johnny Lin asks: As a user of these models does it matter, that the training of these SLM models takes less time?
+
+I think so. What I would iterate on Johnny is actually like the fine-tuning. And then also, you know, future iterations on Phi-2 will probably go pretty fast relative to larger language models. So you might see, like very specific performance bumps and specific domains. So you know, maybe within coding, you could say, let’s just train it on front end code or web dev code like, maybe you’ll get a really high performance, you know. Specific small language model faster than you’ll get a generalized large language model from a training perspective. So I think that’s pretty exciting to see. Will we see more emerging small language models because they are easier to train? So from a consumer standpoint, you know, depending on the task that you pick that could be, you know, something to to keep an eye out on as well. And then the cost as well, for inference of these is a major benefit, which is correlated to training.
+
+Here’s another question: Thanks so much for walking through this paper. If I understand correctly, this model was trained largely on synthetic data textbooks with math and coding problems for those synthetically generated problems, how do they verify the correctness of these synthetic textbooks? 
+
+Yeah. Great point. I think the authors do talk about that. I just had it up.
+
+SallyAnn DeLucia: I believe they do some evaluations with other LLMs for this. They do kind of that random spot checking manually, and then they also are then relying on LLM evals to assess that as well. And there is definitely, I guess, an argument to be made: is that the proper way to ensure correctness? Because that could be wrong twice. But they make great efforts to make sure that they’re using only correct information.
+
+Aman Khan: Yep. I mean, I think because they also kept the training set rather low– it kind of helps them. We point out that on the only non synthetic partner training data is 6.6 billion of filtered code data set, which was the first part that we talked about and then the rest is all synthetic. So it is an interesting point to see. I don’t think the authors talk too much about the Evals they use specifically there, but it would be interesting to learn more about that as well, should they release more information on the training data set itself. But this is about all we have to go off of at the moment.
+
+Another question: Would SLMs be more or less prone to prompt injections or adversarial attacks based on how they’re trained on very specific data? I assume it would be harder to exploit it into performing malicious tasks, because there are not as many threats within the training data. But I’m curious to hear your opinions. 
+
+That’s an interesting speculation. I’m not sure. SallyAnn, do you have any thoughts on this one? II, my initial take is, I would wait and see what the exploits would be for these types of models; they might not resemble the same as a GPT-4. Type of prompt injection, where you can kind of get away with, you know, kind of tricking the model in some way. But they might look different, and you might still get, you know, some type of exploit here.
+
+SallyAnn DeLucia: Yeah, I agree with your kind of sentiment there that it’s kind of early to know for sure what that landscape is going to look like. I think that there’s always the opportunity to get these models to perform a malicious task just by their nature. So I think I agree it’s hard to say exactly what’s going to look like, but I don’t think I would say that it’s impossible for them to be exploited.
+
+Aman Khan: Yeah, maybe, said another way, the model is going to be less capable on general tasks, in the first place, so compared to an LLM, so even if you are trying to get it to do something it may not reason as well about even, you know, like spouting out internal parameters very well. So yeah. The the internal parameters that it has, or the tokens it has might be, might be less harmful in some way, but they admit you may also just not get a very meaningful response to a potentially, high complexity type of exploit in the first place, so you may just get, garbage out in some way in that case.
+
+SallyAnn DeLucia: Yeah, this will be an interesting kind of topic to kind of follow and see where research goes with it.
+
+ 
+
+Deployment Workshop 
+
+ 
+
+Aman Khan: Alright. Should we do the live part? I think we’ve got about 14 min left. So we’ve covered benchmarks, and we can get into deployment. 
+
+So what I thought we could do is actually make this a little interactive for folks. So we have a couple of tools up. That might be kind of interesting for people here that haven’t seen this before.
+
+So there are two tools that you can use to actually download these models and run them on your own. Your own hardware. Actually, because what we’ve been kind of hitting home is that these are small language models, their technical requirements. The hardware requirements are actually much lower than you know, something like a GPT-4, that means that you can actually deploy smaller versions of these models. Think of these as quantized versions. Quantization is basically reducing the precisions of a models, clock calculations to make it more efficient. So think of it as an even more slim down version of a small language model to be optimized, to run locally. There are two tools that you can use here. One of them is open source. So if you’d prefer to use the open source route, there’s a tool called Ollama. It’s really easy to get started with, you just go straight onto their website, and the open source component of this is like all the code is open source. The application runs fully locally. I’m gonna show that one first. Actually, so I have it running right now.
+
+And it’s really easy to get started. So basically, you install Olama, you run the application, and then you can just click Ollama run. And they have a number of models already ready to go so you can go to any of these, and you know you can run, Mistral. If you scroll down, you’ll see Phi-2 as well. 
+
+And you basically run this command: Ollama run Phi. And it’s going to actually kind of exit this to just sort of kill it for you, and just sort of show what that looks like. Immediately, Olama. And hopefully, folks can see that, you know. I’ll try and make my code a bit bigger. But this is running in a terminal run, this command. It’s actually going to interact with the Cpp, which is the llama parameters directly, just like how you would want to package up the model. In the first place, they actually download it from some source. I believe it’s Hugging Face, but don’t fact check me on that one. They’re hosting the model in some way. Looks like they reference Hugging Face here. And then, basically, you can start running commands on it directly.
+
+So if I type this in: Hello, can you help me find my way to Toronto? It actually gives a response. This is running locally. I don’t need my Internet connection. So it’s actually inferencing directly with Phi 2 on my machine. So this is a pretty general task. So I could say something more specific. One thing you’ll notice is, if it’s not instruction fine-tuned, it’s gonna keep spouting parameters. You can actually tune the amount of tokens you want to produce. And all of those parameters are actually a tunable amount of tokens that should output the way that temperature, etc. So the things you would expect to be able to tune with an LLM. 
+
+And then and then there’s a couple of things you can do with the API as well. So because this model is running locally, you can use Ollama’s API and you can actually set up a local host, this model is actually running directly for inference. And you can use code completion, basically very similar to what you would be doing with an OpenAI type of interface. So pretty cool.
+
+The other tool I wanted to show is, so this is closed source, it’s much more UI centric focused flow around a similar task of being able to iterate with local LLMs. Run them locally. So this does point to Hugging Face/ So if I’d searched Phi-2 I’ll get a bunch of different quantizations. So remember what we talked about before. If I pick certain lower precisions or lower quantizations, I’m gonna get a loss of quality. But my model artifact is gonna be a lot smaller, 1.17 gigs. If I want higher quality and higher precision, my model gets a little bit larger. It’s gonna take a little bit more CPU and GPU to run on my local machine. This, I’m running this on an map right now for context, if people are following along, but and then you can get different versions of that model. Different fine-tuned of that, you know different fine tunes of that model, explaining directly to hugging face. Hub, so if you wanted to host your own model, you could also reference it from LLM studio. So it’s pretty cool, the interface is really pretty awesome. So I have a version of Phi 2 with these sort of quantization parameters running, as a file locally. I can actually chat with it directly here as well. So this is again sort of the same thing. Let’s say, let’s see, let’s see if it gives the same response. So this is a quantized version. Now, it’s a different version on the base version of the model that I was running in my Ollama terminal.
+
+SallyAnn Delucia: What I really liked about LLM studio is those options kind of over on the right that you can get a little specific with it. There’s even the option to leverage that GPU for your Mac. So it’s super cool. If you are playing around with this live, and you want to check out these models on Hugging Face. This publisher actually gives you some description of each of the quantized versions that can kind of help you pick what might be best for your task. Kind of highlights, what are the trade offs for that conversation?
+
+Aman Khan: Yeah, you get a lot of you get a lot of like extra sort of things here around like time to first token speed your Gpu and CPU usage, token, count, etc., and the other UI is definitely get the context length here.  Yeah, okay, so this is what you had. So this is probably one of the last points. I think we’ll touch on here. So this is super cool. You can add presets to the model. You can do things like pre prompted as well. Each model has its own presets that you can use. The presets are, you know, things like I mentioned before, maybe I can just open one as an example. But it’s basically you know how I would. You know, what is the input, prefix the authors recommend using, instruct and output for input and and input prefix and suffix to to kind of bound. You can add a pre prompt. You know you’re an assistant trying to do Xyz and then you can, you know, of course, just change other parameters as well.
+
+And then, I did want to touch on the context length. You can use Gpu acceleration, which is pretty cool. And then also you can host it through LLM studio, which was a lot of fun. You can basically start up a server. Run this on your machine, you know, and you have. There you go. You have a model running on your machine.
+
+So this was kind of the last but one of the last things I want to point out, which was that there’s some very emerging research and work that people are doing to actually extend the context lengths that these small language models can basically take.
+
+So you can self extend the token limits. And basically, you know, this is I think this is something we want to dig into a little bit more. But if you take one of these off the shelf, small language models, and you continuously extend the token limit, basically transferring the previous call to a new call and kind of continuously doing that, you can actually get for what it looks like to be some pretty interesting results. So I do want to call out that, we do say that context extension is is something that we’re gonna keep an eye on as well makes it kind of interesting to look at in the future. For these smaller language models. 
+
+Okay, we have one question: When using models locally in Ollama or LLM studio, do they retain conversation context for subsequent questions in the same session? 
+
+Yeah, great question. They do. My understanding is this is all one chat context. So let’s actually test it out ourselves…
+
+Okay, well, the prompt I just provided doesn’t really give a great response, but it does actually prove the point of the python function sort of retaining in the context window. So it is one session running. I think I’d be, maybe because I was messing with some of the parameters that this requested and passed through correctly, but we do kind of underscore the point of they’re, you know, the retained context. 
+
+Cool? That was, I think, all we had anything else there, SallyAnn?
+
+SallyAnn DeLucia: No, I think just the local deployment as we touched on earlier, I’m really excited to see what applications come from that I just kind of just open up the possibility of these SLMs being deployed on the edge. So lots of cool use cases are to come. And you can expect more on the Eval side from Arize more around how to monitor these models. If you’re running these deployments locally, monitoring what the outputs are, how to evaluate them. Lot more tooling coming from us as well in that space especially from an open source tooling perspective with Phoenix. So you know, expect that you’ll be able to to have tracing and monitoring and evaluations on these SLMs once you start experimenting with them, and if you have any feedback, feel free to drop us a note on Twitter or on Linkedin
+
+We’re happy to take any feedback on how these sessions are going, what you liked, what you didn’t like, and then also you know what you’d like to see in future ones, too. But yeah, thanks for joining, it was great having you all, and thanks for all the great questions.
+
+SallyAnn DeLucia: Thanks everyone.
+
+Share
+
+
+
+Suggested reading
+phoenix ragas
+Evaluating and Analyzing Your RAG Pipeline with Ragas and Phoenix
+Sally-Ann DeLucia and Amber Roberts headshots
+RAG vs Fine-Tuning
+Sign up for our monthly newsletter, The Drift.
+Subscribe
+arize logo
+Platform
+Solutions
+Docs
+Pricing
+Learn
+Course
+Community
+Blog
+Topics
+LLM Leaderboard
+LLM Evaluation
+LLM Prompt Engineering
+RAG LLM
+AI Orchestration
+Machine Learning Observability
+ML Monitoring
+Model Monitoring
+Model Drift
+KL Divergence
+Jensen Shannon Divergence
+Kolmogorov Smirnov Test
+About
+Customers
+Careers
+Press
+Security
+Try now
+Book a Demo
+Sign In
+Contact
+Privacy Policy
+Twitter Linkedin
+Copyright © 2024 Arize AI, Inc
+

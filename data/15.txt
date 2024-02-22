@@ -1,0 +1,224 @@
+Prompt Engineering home
+Microsoft
+LLM
+Phi-2
+Phi-2: Microsoft's NewPowerful 2.7B Parameter Language Model
+Microsoft has released Phi-2, a compact 2.7 billion parameter language model that achieves state-of-the-art performance on reasoning and language tasks, matching models over 25x its size.
+
+Sunil Ramlochan - Enterpise AI Strategist
+Sunil Ramlochan - Enterpise AI Strategist
+December 13, 2023 — 7 minutes read
+Phi-2: Microsoft's NewPowerful 2.7B Parameter Language Model
+Image Src: Microsoft
+Introduction
+Recently, there have been major advances in large language models (LLMs) - AI systems trained on massive text datasets that can understand and generate human language at an impressive level.
+
+Models like OpenAI's GPT-3 and Google's PaLM/Gemini have demonstrated abilities like conversational chat, answering questions, summarizing texts, and even translating between languages.
+
+However, these advanced LLMs often have hundreds of billions or even trillions of parameters, requiring substantial computing resources to train and run. This has spurred interest in developing techniques to create smaller yet still highly capable language models.
+
+Microsoft's newly announced Phi-2 model exemplifies this push towards efficient and powerful LLMs. With only 2.7 billion parameters, Phi-2 matches or even exceeds the performance of LLMs over 25x its size on complex language understanding benchmarks.
+
+The Phi-2 model displays strong competency across tasks involving reasoning, math, coding, and other technical domains. And it achieves this breakthrough capability through innovations in model design as well as curation of high-quality training data.
+
+Phi-2: The surprising power of small language models
+Phi-2 is now accessible on the Azure model catalog. Its compact size and new innovations in model scaling and training data curation make it ideal for exploration around mechanistic interpretability, safety improvements, and fine-tuning experimentation on a variety of tasks.
+
+Microsoft Research
+Alyssa Hughes
+
+Phi-2's Development
+The Phi-2 model comes out of extensive research by Microsoft's Machine Learning Foundation team focused on efficient language model design. This group has been at the forefront of developing techniques to achieve advanced language abilities with smaller model sizes.
+
+Overview of Microsoft's Machine Learning Foundation Team
+
+Formed in 2021 to advance state-of-the-art AI and machine learning
+Core focus on natural language processing and understanding
+Earlier work includes Turing NLG models and advanced GPT variants
+The foundation's researchers have brought deep expertise in areas like model scaling, training techniques, and dataset curation - all critically important in developing capable yet compact models like Phi-2.
+
+Evolution from Phi-1 to Phi-2
+
+Phi-2 is the latest iteration in the Phi line of models from the team, building upon the earlier 1.3B parameter Phi-1 and Phi-1.5 versions. With each version, the researchers have introduced innovations to improve model performance within a small parameter budget.
+
+Key advancements enabling Phi-2 include:
+
+Strategic pretraining data selection
+Custom synthetic dataset creation
+State-of-the-art transformer model initialization
+Multi-stage transfer learning process
+These developments allowed the jump from 1.5B parameters in Phi-1.5 up to 2.7B in Phi-2 while massively improving capability.
+
+Goal of Achieving More With Less
+
+The overarching aim has been proving that highly performant language understanding is possible without the hundreds of billions of parameters larger models have required. Phi-2 is definitely a huge step towards compact models matching their massively scaled counterparts. Its efficiency opens more applications for advanced language intelligence.
+
+The researchers emphasize they will continue this push - finding new ways to maximize language mastery within smaller model bounds. This work promises to keep increasing access to AI through efficient and responsible design.
+
+Training Phi-2
+The breakthrough performance of Phi-2 is enabled not only by innovations in model design, but also by strategic decisions in constructing the training process. Key details of how this compact yet capable model was created are outlined below.
+
+Transformer Architecture and Training Objective
+
+Like many state-of-the-art language models, Phi-2 leverages the Transformer architecture first introduced in 2017. Specifically:
+
+Encoder-decoder Transformer configuration
+Next word prediction training objective
+Pretrained then fine-tuned on downstream tasks
+This provides a strong foundation, on top of which the Phi-2 researchers introduced custom optimization to maximize efficiency.
+
+Massive Diverse Training Data
+
+Phi-2 was trained on a corpus of 1.4 trillion tokens, orders of magnitude larger than typical language model datasets. This provides broad coverage of concepts and topics. Unique aspects of the data include:
+
+Mix of high-quality synthetic and web crawled data
+Tailored data selection for teachability
+Advanced pretraining strategies like masked language modeling
+Together, this curriculum learning approach exposes the model to key knowledge across different domains.
+
+Substantial Compute for Training
+
+Training such a capable model required significant resources, with details as follows:
+
+96,800 GPUs used for distributed training
+Training duration of 14 days
+Multiple iterations adjusting hyperparameters
+This level of compute enables the required model scale and rich dataset exposure within reasonable training time.
+
+In the end, Phi-2's design, data, and training resources combined to enable a much more efficient route to strong language mastery compared to other models. The details behind its training process showcase more possibilities in this direction.
+
+Phi-2 Performance on Benchmarks
+While the training details behind Phi-2 are impressive, the true indicator of a language model's capability comes from its performance on benchmarks designed to test language mastery across different domains. And despite its small size, Phi-2 achieves new state-of-the-art results across evaluations of reasoning, understanding, math, coding, and more.
+
+Evaluations Across Diverse Tasks
+
+The researchers assessed Phi-2 on a range of established benchmarks that probe different aspects of language intelligence, including:
+
+Winograd Schema Challenge - reasoning
+ARC - science question answering
+MathQA - mathematical word problem solving
+HumanEval - multi-task language understanding
+Reasoning:
+
+Big Bench Hard (BBH): Phi-2 scored 59.2 in 3-shot evaluation with Context of Text (CoT), compared to 40-47.8 for 7B and 13B Llama-2 models.
+Commonsense reasoning: Phi-2 achieved 68.8 averaged across tasks like PIQA, WinoGrande, ARC, and SIQA. This is higher than the 62.2-69.2 scores of 7B to 70B Llama-2 models.
+Language Understanding:
+
+Benchmarks like HellaSwag, OpenBookQA, MMLU (5-shot), SQuAD v2 (2-shot), and BoolQ: Phi-2 scored 62.0 averaged, better than smaller Llama-2's 56.7-67.6 and comparable to the 63.7 of 7B Mistral.
+Math:
+
+GSM8k (8-shot): Phi-2 outperformed all compared models with 61.1 score, compared to 16.5-64.1 for Llama-2 and 46.4 for Mistral.
+Coding:
+
+HumanEval and MBPP (3-shot) coding tasks: Phi-2 achieved state-of-the-art 53.7 score, far surpassing 21.0-38.3 scores of Llamas and 39.4 score of Mistral.
+In summary, with only 2.7 billion parameters Phi-2 matches or exceeds much larger models (up to 70B) on key language and reasoning benchmarks thanks to its training innovations.
+
+Example Outputs
+
+Some sample model outputs help illustrate the advanced reasoning within a 2.7B parameter package:
+
+Correctly solves multi-step physics problems
+Provides accurate explanations for complex coding errors
+Sensibly answers ambiguous common sense questions
+These outputs would challenge LLMs even 10x Phi-2's size, showcasing new possibilities for performant compact models.
+
+The breadth and quality of Phi-2's benchmark results validate its design for unlocking greater efficiency in language AI without sacrificing skill.
+
+Responsible AI Considerations
+While Phi-2 demonstrates state-of-the-art language mastery in a small efficient package, work is ongoing to ensure its skills are applied responsibly. As with any advanced AI system, there are ethical considerations in deploying Phi-2 related to issues like bias and toxicity.
+
+Improved Toxicity Without Alignment
+
+The researchers evaluated Phi-2 on safety benchmarks that assess model outputs for sensitive attributes like toxicity, bias, and stereotyping. The results showed across multiple categories like race and gender:
+
+Phi-2 demonstrates lower toxicity than other open source baseline models
+This despite not undergoing specialized alignment techniques
+The improved safety scores are likely related to Phi-2's training data curation and model design. But additional steps can further enhance responsible behavior.
+
+Ongoing Efforts Towards Responsible LLMs
+
+Microsoft and others in the field are advancing methods to promote ethics in language models including:
+
+Expanded safety benchmarking suites
+Formal axiomatic alignment
+Reinforcement learning from human feedback
+Applying these techniques to models like Phi-2 ensures impressive capability comes alongside reliably responsible behavior as LLMs continue progressing.
+
+There is always more work needed on responsible AI. But Phi-2 is another move towards language models that push the state-of-the-art while respecting ethical imperatives — continuing to unlock possibilities for AI accessibility and inclusion.
+
+Access Phi-2
+Phi-2 is a proprietary model developed by Microsoft Research, and neither its codebase nor weights are openly available. However, Microsoft has made Phi-2 accessible through the Azure AI Studio model catalog to foster research and development of language models:
+
+Azure OpenAI Service – Advanced Language Models | Microsoft Azure
+Azure OpenAI Service offers industry-leading coding and language AI models that you can fine-tune to your specific needs for a variety of use cases.
+
+Microsoft Azure
+
+Researchers can leverage Phi-2 via the Azure OpenAI Service APIs to explore areas like interpretability, safety mechanisms, and fine-tuning tasks. Usage fees may apply based on consumption. Please refer to Azure documentation for pricing details.
+
+Microsoft's Phi-2 model is an exciting milestone in efficient yet powerful language AI. To recap, key capabilities and benchmarks include:
+
+Core Strengths of Phi-2
+
+2.7 billion parameters matches or beats LLMs 25x larger
+Top-tier performance on reasoning, language, math, coding tasks
+Efficiency enables more accessible advanced language intelligence
+Areas for Future Improvements
+
+While impressive, Phi-2 still has room to grow. Next steps by Microsoft and others may involve:
+
+Expanding knowledge breadth with additional data
+Increasing parameter count while maintaining efficiency
+Enhancing robustness and reducing bias via alignment techniques
+Broader Implications
+
+The success of Phi-2 points towards an impending shift in the landscape of language AI:
+
+Small yet highly skilled LLMs becoming the norm
+Reduced compute requirements lowering barriers to access
+Custom models optimized for specific use cases
+As models continue to progress, we can expect to see ever-growing language mastery within smaller, more inclusive parameters. Driven by innovations from Microsoft and other tech leaders to responsibly unlock AI's possibilities.
+
+The capabilities packed into Phi-2's efficient design provide a glimpse into the future as LLMs pursue language intelligence that is as ethical as it is superhuman.
+
+Share this post 
+The link has been copied!
+https://promptengineering.org/phi-2-microsofts-newpowerful-2-7b-parameter-language-model/
+
+Newer post
+Understanding AI as a Non-Linear, Context-Driven System
+Older post
+Openness in Language Models: Open Source vs Open Weights vs Restricted Weights
+
+
+You might also like
+
+Sunil Ramlochan - Enterpise AI Strategist
+Microsoft Copilot Brings Helpful, Creative AI Into Everything You Do
+
+Sunil Ramlochan - Enterpise AI Strategist
+Microsoft's PromptFlow Brings Powerful AI Capabilities to Everyone
+
+Sunil Ramlochan - Enterpise AI Strategist
+Microsoft's AI-Driven Rally Propels Satya Nadella's Net Worth Past $1 Billion
+
+Sunil Ramlochan - Enterpise AI Strategist
+Meta and Microsoft Bring Llama 2 AI to Azure and Windows
+
+Sunil Ramlochan - Enterpise AI Strategist
+Teladoc Health Incorporates Microsoft's AI Technology - Evolution in Telehealth
+
+Sunil Ramlochan - Enterpise AI Strategist
+The Inevitable Rise of AI in Cybersecurity: A $30 Billion Opportunity on the Horizon
+Subscribe to new posts
+Your email address
+Subscribe
+Prompt Engineering home
+The Official Source For Everything Prompt Engineering & Generative AI
+
+Social
+Twitter
+Links
+Sign up
+Contact Us
+© Prompt Engineering 2024. PromptEngineering.org

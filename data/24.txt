@@ -1,0 +1,65 @@
+Skip to main content
+The Verge homepage
+
+Menu
+
+Menu
+POSTED DEC 16, 2023
+
+AT 12:01 PM PST
+
+6 Comments6 New
+W
+WES DAVIS
+Microsoft says its newest compact “small language model,” Phi-2, is bigger and better.The company has been working on training AI models on much smaller data sets comprised only of “textbook-quality” data, as part of its Phi models.
+Microsoft says in a research blog that Phi-2, which is about twice as big as its predecessor, Phi 1.5, continues to perform on par or better than certain larger open-source Llama 2 models, including one with 13 billion parameters.
+
+
+A chat session where Phi-2 identifies why a physics calculation was incorrect.
+Phi-2 identifies an error in a physics calculation. Image: Microsoft
+Welcome to our new comments section!
+
+Please read and understand The Verge’s Community Guidelines before participating.
+
+Your comment history and more now lives under the My Profile tab at the top of the comments. If you're having any issues verifying your account, email support@theverge.com
+
+Comments are closed on this story.
+
+Sort by
+
+Newest
+Most Popular
+MOST POPULAR
+Fujifilm announces the X100VI, its follow-up to a TikTok sensation
+Walmart to acquire Vizio in $2.3 billion deal
+One of the last small-ish Android phones looks like it’s going the way of the iPhone Mini
+Ford slashes Mustang Mach-E prices again as EV price war enters its second year
+Violence spreads from sea to shining sea in A24’s latest Civil War trailer
+More from Artificial Intelligence
+Figma CEO Dylan Field.
+Interview: Figma’s CEO on life after the company’s failed sale to Adobe
+An illustration of The Vergecast team, with a Vision Pro over top.
+The shine comes off the Vision Pro
+3D illustration of a robot version of “The Thinker”.
+Spike Jonze’s Her holds up a decade later
+3D illustration of a robot rubber stamping a text file.
+You sound like a bot
+TERMS OF USE
+PRIVACY NOTICE
+COOKIE POLICY
+DO NOT SELL OR SHARE MY PERSONAL INFO
+LICENSING FAQ
+ACCESSIBILITY
+PLATFORM STATUS
+HOW WE RATE AND REVIEW PRODUCTS
+CONTACT
+TIP US
+COMMUNITY GUIDELINES
+ABOUT
+ETHICS STATEMENT
+THE VERGE IS A VOX MEDIA NETWORK
+
+ADVERTISE WITH US
+JOBS @ VOX MEDIA
+© 2024 VOX MEDIA, LLC. ALL RIGHTS RESERVED
+

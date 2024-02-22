@@ -1,0 +1,595 @@
+	Hacker News new | past | comments | ask | show | jobs | submit	login
+Microsoft Phi-2 model changes licence to MIT (huggingface.co)
+240 points by regularfry 46 days ago | hide | past | favorite | 91 comments
+
+
+	
+RcouF1uZ4gsC 46 days ago | next [–]
+
+It is really exciting to see these open models.
+What is interesting is that the AI “ethicists” all want to serve as a high priesthood controlling access to ML models in the name of safety. However, I think the biggest danger from AI is that these models will be used by those who control the models to control and censor what people are allowed to write.
+
+These open source models in the hands of the public, are, IMO the best defense against the true danger of AI.
+
+Kudos to Facebook and Microsoft and Mistral for pushing this.
+
+
+	
+acdha 45 days ago | parent | next [–]
+
+> What is interesting is that the AI “ethicists” all want to serve as a high priesthood controlling access to ML models in the name of safety.
+This is a very uncharitable take. I would suggest familiarizing yourself with the actual arguments rather than summaries on social media. There’s considerably more thought than you’re crediting them with, and extensive discussion around the risk you’re worried about along with proposed solutions which – unlike your “best defense” – could actually work.
+
+
+	
+Uehreka 45 days ago | root | parent | next [–]
+
+Moreover, in the next sentence GP confesses that they “think the biggest danger from AI is that these models will be used by those who control the models to control and censor what people are allowed to write”, revealing that they too harbor ethical concerns about AI, they’re just not one of “those” AI ethicists.
+
+	
+cubefox 45 days ago | root | parent | next [–]
+
+That's more a terminological accident I think. Those that describe themselves as working on "AI ethicis" in academia are mostly worried about stuff like AI's not saying something offensive or potentially discriminating related to race or sex, while people who use the term "AI risk" or "AI safety" are more worried about future risks like terrorism, war, or even human extinction.
+Thinking about it, both groups don't talk a lot about the risk from AI being used for censorship...
+
+
+	
+acdha 45 days ago | root | parent | next [–]
+
+> Thinking about it, both groups don't talk a lot about the risk from AI being used for censorship...
+This is a pretty common topic in the academic community I follow, along with related things like how it’ll impact relationships with employers, governments, etc. I see that most as a counterpoint to the more sci-fi ideas as in “don’t worry about AIs annihilating humanity, worry about your boss saying an AI graded your work and said you are overpaid”.
+
+
+	
+cubefox 45 days ago | root | parent | next [–]
+
+What's this community called?
+
+	
+visarga 45 days ago | root | parent | prev | next [–]
+
+> if a non-signatory country is building a datacenter that might kill everyone on Earth, you should be willing to preemptively destroy that datacenter
+Eliezer Yudkowsky, high priest of AGI risk
+
+
+	
+refulgentis 45 days ago | root | parent | next [–]
+
+Yeah I think that's the posters point, "AI ethics" isn't "AGI risk", and I'll add A) Eliezer isn't a "high priest" he's just a guy, B) he plays a character and knows it.
+You'd be surprised how much you can advance in life just by avoiding talking or thinking about other people too much, much less grouping them. It's a fundamental part of our animal brains and it's gotten oh-so-much worse as we migrated to the internet. And it leads to epistemic closure.
+
+n.b. I think the AGI risk stuff is bunko and the original AI ethics cheerleaders ruined their own field. You don't need to agree to understand
+
+
+	
+potatoman22 46 days ago | parent | prev | next [–]
+
+I think it's harmful to characterize "all" AI ethicists as a "priesthood" wanting to gatekeep access to these models. There are plenty of people who care both about the democratizing of these tools as well as safe and ethical use.
+
+	
+nullstyle 45 days ago | root | parent | next [–]
+
+Recommendations? Someone nonadjacent to the lesswrong smooth brains, pretty please.
+
+	
+smoldesu 45 days ago | root | parent | next [–]
+
+Seriously, I'd also really appreciate some examples of moderate AI ethicists. The vocal minority is all I've heard so far, and their arguments sound closer to fiction than science.
+
+	
+johnchavens 45 days ago | root | parent | next [–]
+
+Thanks, Andrew. And I’m happy to send links to a free read only verizon of the standard of helpful. Or do a webinar with Andrew on 7010 to demonstrate the moderate AI ethicist stance which I hope I embody but don’t need to focus on titles too much. My ideology or agenda, as it were, is that AI governance prioritizes ecological flourishing and human wellbeing at the outset of design, which also means the outset of funding. Accountability then moved from a focus on the output of one AI system or product to how the people making and releasing it demonstrate their ongoing, full value chain commitment to giving back more to the planet than they take and working to create genuine l, symbiosis level caregiving oriented value to an end user.
+
+	
+smoldesu 45 days ago | root | parent | next [–]
+
+That's an interesting perspective. What's the hope that AI will ensure human symbiosis when traditional software models (arguably) fail to do so?
+The best analog that comes to mind for me is Open Source software, and viral licenses that encourage a literal obligation to "give back" to the community. As helpful as that is, Open Source software still consumes power and can't ensure ecological symbiosis with it's users (even if it's ethically superior to proprietary alternatives). With that in mind, I'm curious how AI licensing differs, and how it's increased cost of training/execution will be subsidized by the value of the gross output.
+
+The other more common question that comes to mind is enforcement. In your "agenda" as it were, would AI governance be obligatory or optional? Should we draw the line differently for research/nonprofit/commercial entities? In a traditional economy, the existence of Open Source software has enabled better value extraction for businesses which ultimately do not prioritize environmental concerns. Along the same line of thought as the first question, I'd be interested to hear how AI governance can avoid overreach while still addressing the same issue we had with traditional software creating excess value that mostly does not benefit the ecology or greater good.
+
+This is something I'm very interested in generally, but I question if we have the framework to actually achieve meaningful human-AI symbiosis. Open Source succeeded in it's goal to subvert copyright and capitalism by carefully following the rules and managing it's expectations from the start. I worry that you're biting off more than you can chew asking for human-computer, human-AI or even AI-ecology symbiosis. I'd be glad to summon another boffin who can prove me wrong though :P
+
+
+	
+AndrewKemendo 45 days ago | root | parent | next [–]
+
+The broader point that John is making, and was central to the thesis of the standard is that we have to entirely rethink the software engineering paradigms, and generally engineering paradigms to include at every step a question of human centered externalities.
+That is just not something that’s built into anything post Norbert wiener cybernetics shift in the late 1950s, 1960s which was just totally blown out of the software side of engineering.
+
+
+	
+smoldesu 45 days ago | root | parent | next [–]
+
+I wish you luck. I have limited perspective, but I'd wager that the externalities of greed and human conflict will prevail over the thoughtful and pragmatic limitation of technology for human benefit. I hope I'm wrong (for everyone's sake).
+
+	
+AndrewKemendo 45 days ago | root | parent | next [–]
+
+Yes well that’s basically what I’m working on the rest of my life.
+I’ve been working on ASI for two decades and now as we’re going to achieve it, I’m switching to working on alternative socio-economic systems to capitalism so that ASI doesn’t control human systems.
+
+
+	
+AndrewKemendo 45 days ago | root | parent | prev | next [–]
+
+I mean we wrote a whole ass engineering standard for this:
+https://standards.ieee.org/ieee/7010/7718/
+
+I wrote the implementation annex
+
+
+	
+smoldesu 45 days ago | root | parent | next [–]
+
+TIL. That's a neat standard and I'm glad it exists, it's an interesting reflection of what opt-in ethical frameworks can look like.
+For every reasonable and non-authoritarian suggestion I read for regulating AI, I feel like I wade through 10 Neuromancer-level takes. It's definitely a me-problem, I gotta stop scrolling through /new...
+
+
+	
+AndrewKemendo 45 days ago | root | parent | next [–]
+
+Thanks.
+This was the effort of dozens of engineers, ethicists and systems people all done prior to the LLM revolution so it doesn’t have all the mystical junk that the newcomers seem to be latching onto.
+
+
+	
+nullstyle 45 days ago | root | parent | next [–]
+
+I'd like to say thank you as well. I've got reading material for the day :)
+
+	
+AndrewKemendo 45 days ago | root | parent | next [–]
+
+You’re welcome.
+Please also see the other comment from John Havens who led the effort with Laura Musikanski from IEEE
+
+
+	
+potatoman22 45 days ago | root | parent | prev | next [–]
+
+I mainly read on algorithmic fairness, safety, and auditing since they're more practical for work. Authors I enjoy are Inioluwa Deborah Raji, Andrew Smart, and Timnit Gebru.
+
+	
+jillesvangurp 46 days ago | parent | prev | next [–]
+
+I think at this point, the cat is out of the bag. Relying on not so nice people complying with license legalese was never going to be a great way to impose control. All that does is stifle progress and innovation for those who are nice enough to abide by the law. But anyone with other intentions in say Russia, North Korea, China, etc. would not be constrained by such notions. Nor would criminal organizations, scam artists, etc.
+And there's a growing community of people doing work under proper OSS licenses where interesting things are happening at an accelerating pace. So, alternate licenses lack effectiveness, isolate you from that community and complicates collaboration, and they increasingly represent a minority of the overall research happening. Which makes these licenses a bit pointless.
+
+So, fixing this simplifies and normalizes things from a legal point of view which in turn simplifies commercialization, collaboration, and research. MS is being rational enough to recognize that there is value in that and is adjusting to this reality.
+
+
+	
+rmbyrro 45 days ago | root | parent | next [–]
+
+> anyone with other intentions in say Russia, North Korea, China, etc.
+I understand why the geopolitical focus, but let's not forget there are plenty of ill intentioned actors everywhere.
+
+
+	
+NicoJuicy 45 days ago | root | parent | next [–]
+
+Not with such bad intentions
+
+	
+aleph_minus_one 45 days ago | parent | prev | next [–]
+
+> What is interesting is that the AI “ethicists” all want to serve as a high priesthood controlling access to ML models in the name of safety. However, I think the biggest danger from AI is that these models will be used by those who control the models to control and censor what people are allowed to write.
+Who says that this is not an (or even the) actual hidden agenda behind these insane AI investments: building an infrastructure for large-scale censorship?
+
+
+	
+menacingly 45 days ago | parent | prev | next [–]
+
+Every center of value develops a barnacle industry with their foot hovering over the brake pedal unless a tax is paid to their army of non-contributing people
+
+	
+eurekin 45 days ago | root | parent | next [–]
+
+Can you elaborate? :)
+
+	
+dleeftink 46 days ago | parent | prev | next [–]
+
+I wonder, how would this future differ from how big tech currently operates in relation to (F)OSS?
+Even with code/weights common to the public, a significant resource divide remains (e.g compute, infrastructure, R&D). I'm not arguing against more permissive licensing here, but I do not see it as a clear determinant for levelling the field either.
+
+
+	
+andy99 46 days ago | parent | prev | next [–]
+
+Facebook? Have they changed the llama license?
+
+	
+rat9988 46 days ago | root | parent | next [–]
+
+It's open enough. Meta contributed a lot to open source ML, and their llama license is open enough.
+
+	
+RcouF1uZ4gsC 46 days ago | root | parent | next [–]
+
+I think people have lost the difference between defacto and dejure openness.
+A proprietary software program running on your hardware is more defacto open than an AGPL SAAS running on the cloud.
+
+
+	
+Borealid 45 days ago | root | parent | next [–]
+
+If you had said GPL, I would agree with you.
+But you said "AGPL". AGPL SAAS running on someone else's computer that you can access requires that they provide you with the source code they're running. Barring shenanigans, that source code would enable you to run the same SAAS yourself if you desired to do so.
+
+I'd say having the ability to run the program locally _and_ its source code is "more open" than just having the ability to run the program locally in binary form. With AGPL in your scenario you get all three of source access, local execution, and remote-SAAS exection. Proprietary local code you get one of those three.
+
+
+	
+eigenket 46 days ago | parent | prev | next [–]
+
+I don't understand how normal people having access to AI models helps you when big businesses are using them in unethical ways.
+Lets say for example I have access to exactly the models Facebook is using to target my elderly relatives with right-wing radicalising propaganda. How does that help me?
+
+This assumption that it helps somehow sounds like you've internalised some of the arguments people make about gun control and just assume those same points work in this case as well.
+
+
+	
+visarga 45 days ago | root | parent | next [–]
+
+This small model could run locally and filter out bullshit/propaganda as configured by the user. Having control over the last model that filters your web is essential.
+Local models will be mandatory once the web gets filled with AI bots. You need your own AI bot to fight them off.
+
+
+	
+eigenket 45 days ago | root | parent | next [–]
+
+Most people don't even use ad blockers today. Hoping that people (especially the people who are vulnerable to such misinformation and actually need it) personally configure a propaganda filter AI is wildly optimistic.
+
+	
+Baldbvrhunter 45 days ago | root | parent | prev | next [–]
+
+> Lets say for example I have access to exactly the models Facebook is using to target my elderly relatives with right-wing radicalising propaganda.
+is it working?
+
+
+	
+borissk 46 days ago | parent | prev | next [–]
+
+Don't think this is the biggest danger. In a few years if they continue to improve at the current speed these models can become really dangerous. E.g. an organization like ISIS can feed one some books and papers on chemistry and ask it "I have such and such ingredients available, what is the deadliest chemical weapon of mass destruction i can create". Or use it to write the DNA for a deadly virus. Or a computer virus. Or use one to contact millions of say Muslim young men and try to radicalize them.
+
+	
+jafitc 46 days ago | root | parent | next [–]
+
+Do you think the ISIS is bound by the words “non-commercial” in a license file when they have the source anyway?
+It was available even before this, all they changed is that law abiding citizens can put apps in the App Store and charge money for it.
+
+(More importantly law abiding companies can build on and fine tune it in hopes of profit).
+
+
+	
+borissk 45 days ago | root | parent | next [–]
+
+I haven't said anything regarding a license - where did you get that from?
+ISIS, etc. can easily abuse an open-source model and abusing a closed source model running in the cloud, e.g. ChatGPT 4 is a lot harder.
+
+
+	
+Y_Y 46 days ago | root | parent | prev | next [–]
+
+Why radicalize only Muslims? Why do you need an LLM to teach you how to make a bomb?
+Why not just ask it how to reach heaven with the lowest effort possible? Why don't good guys like you have your LLM pre-un-radicalize all those poor young men?
+
+
+	
+dist-epoch 45 days ago | root | parent | next [–]
+
+> Why not just ask it how to reach heaven with the lowest effort possible?
+Becoming a martyr is the fastest way and with the lowest effort.
+
+
+	
+EnigmaFlare 45 days ago | root | parent | next [–]
+
+Indeed. Pretty much any horrible way to die from the olden days makes you a martyr in Islam. For example, having a building fall on you or gastro-intestinal disease. Fighting is only one of the ways and not really the easiest since the other ways are passive.
+
+	
+realPtolemy 46 days ago | root | parent | prev | next [–]
+
+They can already do that with some simple googling.
+
+	
+borissk 45 days ago | root | parent | next [–]
+
+No, they can't - they would have done it if they could. Producing a practical chemical weapon is a complicated task, with many steps that are not documented in publicly available sources.
+
+	
+acdha 45 days ago | root | parent | next [–]
+
+That’s somewhat true – it’s not easy but not hard enough, as we saw with the Aum Shinrikyo attacks – but an LLM won’t magically have access to non-public instructions and, not having an understanding of the underlying principles, won’t be able to synthesize a safe process from public information.
+
+	
+pixl97 45 days ago | root | parent | next [–]
+
+Eh that is up for debate. If I dump a library of chemistry books and industry books on chemistry and volatile chemicals its distinctly possible the model could generate this data.
+
+	
+acdha 45 days ago | root | parent | next [–]
+
+Not without some kind of understanding of the underlying principles. If you were testing something verifiable in code you might be able to test candidates at scale, but this involves a number of real-world processes which would be hard to tackle that way.
+
+	
+sgift 45 days ago | root | parent | prev | next [–]
+
+Control of materials is a far bigger hurdle. If you try to procure materials which can be used for bombs/chemical weapons/.. in significant quantities you will get noticed pretty fast.
+
+	
+Baldbvrhunter 45 days ago | root | parent | prev | next [–]
+
+The same ISIS who released "You Must Fight Them O Muwahhid" [0] with step-by-step instructions for the construction of home made triacetone triperoxide (TATP) bombs as used in the 2017 Manchester Arena attack, the 2015 Paris attacks and the July 7, 2005 London bombings, isn't hoping someone releases an uncensored LLM it can use in 24Gb VRAM so it knows what to do next.
+[0] https://www.counterextremism.com/blog/infamous-isis-bomb-mak...
+
+
+	
+minimaxir 46 days ago | prev | next [–]
+
+Previously it was under a noncommercial license which tempered excitement a bit.
+Given its performance and size, a commercial-friendly license is actually a big deal.
+
+
+	
+jafitc 46 days ago | prev | next [–]
+
+Important to note that this model excels in reasoning capabilities.
+But it was on purpose not trained on the big “web crawled” datasets to not learn how to build bombs etc, or be naughty.
+
+So it is the “smartest thinking” model in weight class or even comparable to higher param models, but it is not knowledgeable about the world and trivia as much.
+
+This might change in the future but it is the current state.
+
+
+	
+rolisz 45 days ago | parent | next [–]
+
+But that still makes it great for RAG applications, where I want the answer to be based on my data, not on whatever it learned from the web.
+
+	
+monkeydust 45 days ago | root | parent | next [–]
+
+Interesting. Anyone tried / benchmarked this for RAG?
+
+	
+refulgentis 45 days ago | root | parent | next [–]
+
+yeah it's good. you'd want* to finetune this before using it (c.f. my reply to it's depressed and insults me for no reason whatsover? @ https://huggingface.co/microsoft/phi-2/discussions/61)
+* by want, I mean need. People self-peasantized heavily on "censorsed models" and don't really understand how these work, and the SNR is out of wack because there's a 100000x more waifu creators and culture warriors than knowledgable people sharing on this subject
+
+
+	
+dlojudice 45 days ago | parent | prev | next [–]
+
+If you think that LLMs have basically two properties: habitability to use natural language and knowledge to answer questions, then Small language models should being seen just excellent at natural language, and that's great because for many tasks general knowledge is not needed, specially for RAG.
+
+	
+ethbr1 45 days ago | root | parent | next [–]
+
+Which more or less mirrors human learning edges.
+If someone read a set of dictionaries, but then talked to actual people... you'd get about the same.
+
+E.g. complete obliviousness to colloquialisms, etc.
+
+
+	
+notnullorvoid 45 days ago | parent | prev | next [–]
+
+> This might change in the future but it is the current state I hope it doesn't change. The focus of a model shouldn't be to embed data. Retrieval is a better method to provide data to a model, and leads to less "sounds smart" but very wrong results.
+Having less data embedded also means that the model is more generally usable outside the realm of chat assistants, where you only want the model to be aware about data you provide it. One example could be in games where you might have a medieval fantasy setting, it would be really weird if you could get a character to start talking to you about US politics. That probably still wouldn't work with Phi-2 without fine-tuning (as I imagine it does have some data of US politics embedded), but I hope it illustrates the point.
+
+
+	
+gumballindie 45 days ago | parent | prev | next [–]
+
+> But it was on purpose not trained on the big “web crawled” datasets to not learn how to build bombs etc, or be naughty.
+It wasn't trained on web crawled data to make it less obvious that microsoft steals property and personal data to monetise it.
+
+
+	
+visarga 45 days ago | root | parent | next [–]
+
+It was trained on "textbook quality" synthetic data + some high quality web data.
+The question is - if we train a model on synthetic data generated by GPT-4 which has copyright issues, what is the status of this model? Will MS have to delete it as well? And all models trained with GPT-4 data?
+
+
+	
+gumballindie 45 days ago | root | parent | next [–]
+
+> if we train a model on synthetic data generated by GPT-4 which has copyright issues
+Is that the new directive from HQ? I see a lot of folks parroting this logic, ignoring that proceeds of crime are criminal themselves.
+
+
+	
+pk-protect-ai 46 days ago | prev | next [–]
+
+I would be more interested in the dataset than the model...
+
+	
+behohippy 46 days ago | parent | next [–]
+
+It's probably an evolution of the phi-1/1.5 "Textbooks are all you Need" training method: https://arxiv.org/abs/2309.05463
+
+	
+alecco 45 days ago | root | parent | next [–]
+
+Yes. And the cost of these synthetic datasets is very high. Nobody is sharing. I suspect people are underestimating the amount of hardware OpenAI/Microsoft are using to build massive amounts of synthetic data. I doubt they are just training models over and over with the common crawls and such.
+
+	
+visarga 45 days ago | root | parent | next [–]
+
+> the cost of these synthetic datasets is very high. Nobody is sharing
+There are plenty of synthetic datasets generated from GPT-4 and other models^[1]. But MS created a large one, 150B tokens. Still 2 orders of magnitude smaller than the 13T used to train GPT-4.
+
+But in the future this will be the main way to improve models - put them to work, and filter their good stuff. Then retrain. Very expensive, but that is the cost of evolution. It took humans a very long time to create the culture and technology that underlies LLMs, it will take a similar effort to push them forward.
+
+Human generated text was the low hanging fruit, but now that it's picked, synthetic data is the only way forward. Models generating their own experience and feedback, doing exploration, combinatorial search, learning from their interactions with humans, from games, experiments and simulations.
+
+But if we're talking about synthetic data - then the elephant in the room is the chat logs of OpenAI. They got 180M users, assume 10K tokens/user/month, that would be 1.8B tokens per month, mostly AI written but interspersed with human replies and tool generated output. This means they can collect in less than a year about as much synthetic data as the original training set.
+
+What if they train GPT-5 solely on synthetic data? That would simplify the copyright issues a lot, and give a 5x boost in efficiency.
+
+[1] https://github.com/Zjh-819/LLMDataHub
+
+
+	
+pk-protect-ai 45 days ago | root | parent | prev | next [–]
+
+Nobody underestimates it. It is clear that this stuff is not cheap. However, all publications without datasets are garbage because you can't replicate them. Why publish at all? It's just noise.
+
+	
+orand 44 days ago | root | parent | next [–]
+
+All world-class scientists who don't cite every book they've ever read or teacher they've ever had are garbage because you can't replicate them. Why be born at all? They're just noise.
+
+	
+pk-protect-ai 40 days ago | root | parent | next [–]
+
+It is not the same. If you can't replicate, you can't verify. There is a difference between what you can infer from the provided information and what you can prove. Replication is a cornerstone of scientific experimentation. Thus, the argument you are using here is bullshit.
+
+	
+dmezzetti 46 days ago | prev | next [–]
+
+This is great. And it's also why independent open source projects are so important. It's hard to think the release of TinyLlama with it's Apache 2.0 license didn't factor into this change.
+
+	
+qeternity 45 days ago | parent | next [–]
+
+What’s the rationale that TinyLlama release played a factor?
+
+	
+blueboo 46 days ago | prev | next [–]
+
+Indicates Phi-3 and the next cohort will obsolete Phi-2
+
+	
+Donz1 45 days ago | prev | next [–]
+
+I read an article about it why it is open source is good so good start for open source community and consumers in general.
+here is the link if you anyone want to read it --> https://digialps.com/microsoft-tiny-llm-phi-2-is-now-open-so...
+
+
+	
+ranguna 46 days ago | prev [–]
+
+This model has been in the top for quite a while, what's so good about it?
+
+	
+intellectronica 46 days ago | parent [–]
+
+Excellent performance for this model size and inference cost. Best model you can run on a device a small as a phone and get performance close to GPT-3.5 level.
+The structure and the training data are also interesting - sparse model using curated synthetic data to achieve much better accuracy than is achieved in models trained on random internet text.
+
+
+	
+jasonjmcghee 45 days ago | root | parent | next [–]
+
+Close to gpt-3.5? Because I’ve tried it and fine tuned variants and it’s been horrible. Next to useless on general tasks. No where near mistral 7 and absolutely not even close to gpt-3.5.
+Best 2.7b? sure.
+
+I have always thought of this model as something you fine tune for a very specific task or dataset.
+
+For others that don’t strongly disagree with the parent comment, can you point me to some examples?
+
+
+	
+stavros 46 days ago | root | parent | prev [–]
+
+Is it really close to GPT-3.5 at 2.7B?
+
+	
+regularfry 46 days ago | root | parent | next [–]
+
+It's 2.7B, not 1.1. In my experience it goes off the rails and starts generating nonsense after a few paragraphs, but I haven't dug too much into tweaking the kv cache params to see if that's controllable. It also needs a fair bit of prompt massaging to get it to do what you want. So no, not GPT3.5, but it's comfortably better than anything else in its size class.
+
+	
+realPtolemy 46 days ago | root | parent | next [–]
+
+How is it compared to 7B LLaMA quantized to run on a raspberry pi?
+
+	
+regularfry 46 days ago | root | parent | next [–]
+
+Probably similar token rates out of the box, although I havent done a straight comparison. Where they'll differ is in the sorts of questions they're good at. Llama2 was trained (broadly speaking) for knowledge, Phi-2 for reasoning. And bear in mind that you can quantise phi-2 down too. The starting point is f16.
+
+	
+jasonjmcghee 45 days ago | root | parent | prev | next [–]
+
+If you can run quantized 7B, nothing beats mistral and its fine tunes- like openhermes2.5
+
+	
+stavros 46 days ago | root | parent | prev | next [–]
+
+This sounds much more realistic, thanks!
+
+	
+eurekin 45 days ago | root | parent | prev | next [–]
+
+What are kv cache params?
+
+	
+regularfry 45 days ago | root | parent | next [–]
+
+Key-value cache in the attention layers. There was a paper a little while back about how maintaining the first N tokens across an extended context helped an LLM keep sane for longer, and it turns out you can replicate it with the right CLI arguments to llama.cpp.
+
+	
+moffkalast 46 days ago | root | parent | prev | next [–]
+
+Close is a subjective term. Vicuna-33B from over half a year ago gets within 22 ELO of 3.5 in the arena leaderboard, but in practice the refusals are reducing 3.5 and other RLHFd models' ratings a lot and they're not even close.
+You can try Phi-2 with wasm here, I mostly just get gibberish out of it though: https://huggingface.co/spaces/radames/Candle-phi1-phi2-wasm-...
+
+Mixtral is the only model that properly matches 3.5 at the moment.
+
+
+	
+Y_Y 46 days ago | root | parent | next [–]
+
+The Elo scoring system is named after a Hungarian man called Arpad Elo (a simplification of his original more Hungarian name). My phone helpfully miscorrects it to "ELO" probably because it prefers Jeff Lynne's Electric Light Orchestra. Anyway,
+Elo is a proper name, not an acronym!
+
+
+	
+moffkalast 46 days ago | root | parent | next [–]
+
+TIL, interesting. I always figured it must be some kind of abbreviation.
+
+	
+stavros 46 days ago | root | parent | prev | next [–]
+
+That makes sense, thank you. There seems to be some inflation, as Mistral is supposed to be GPT-3.5-level, and Mixtral is supposed to be nearer GPT-4, but yeah, it sounds suspicious in practice, even though Mistral is very good.
+
+	
+moffkalast 46 days ago | root | parent | next [–]
+
+Well in some things it totally can be to some extent, yes. You can almost certainly get a Mistral 7B fine tuned for a specific thing (e.g. coding) and it will likely be about as good as 3.5 in that specific thing (not a super high bar in objective terms). For all the other areas it may suffer in performance relative to its original self, but for some applications that's fine. As for GPT-4 it's about 120 ELO points [0] above Mixtral, and that's even the distilled turbo version. Not even close imo, especially when Mixtral is far less censored.
+Both 3.5 and 4 have changed drastically over the past year with continued fine tuning, quantization, etc. so what some people consider their level is not exactly a fixed point either.
+
+[0] The actual leaderboard I'm referencing, it has its biases but it's the most generally indicative thing available right now: https://chat.lmsys.org
+
+
+	
+regularfry 46 days ago | root | parent | next [–]
+
+Mixtral is only 32 ELO ahead of the best 7B model on that leaderboard, although I suspect that might be understating the difference.
+
+	
+derac 46 days ago | root | parent | prev | next [–]
+
+Though admittedly I haven't played with phi-2 much, smaller models are hurt much more by quantization. I'd try 8 bits or so, at least.
+
+	
+WiSaGaN 46 days ago | root | parent | prev [–]
+
+In my experience, it's great at its size, but obviously worse than mistral:7b-instruct-v0.2. Currently mixtral:8x7b-instruct-v0.1 is the lowest inference cost model at similar performance level of GPT-3.5.
+
+
+
+
+
+Guidelines | FAQ | Lists | API | Security | Legal | Apply to YC | Contact
+
+Search: 

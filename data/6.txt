@@ -1,0 +1,60 @@
+
+
+LLM Deep-dive: Phi-2
+By 
+Matouš Eibich
+January 9, 2024
+Introduction
+The landscape of Large Language Models (LLMs) has been predominantly shaped by the pursuit of ever-larger models, with each new model often boasting a larger size than its predecessor. This trend, while yielding impressive results, comes with substantial monetary and environmental costs, both in training and inference stages. However, research like the Chinchilla paper, challenges this norm, suggesting that the key to enhancing LLM performance lies not only in expanding the number of parameters, but also in optimizing data quality and quantity.
+
+
+The growth of model sizes in recent years
+Microsoft's Phi-2 model is an embodiment of this principle. With a modest 2.7 billion parameters, Phi-2 diverges from the trajectory of ever-expanding models. It demonstrates how strategic data usage can achieve or even surpass the capabilities of much larger models. This approach not only reduces computational demands but also suggests a more sustainable and cost-effective path forward in the development of LLMs. 
+
+Training data
+In the development of Phi-2, Microsoft Research placed a strong emphasis on the quality of data used for training. Adhering to the philosophy that 'textbook-quality' data is crucial, the model’s training regime was heavily influenced by the team's earlier work, "Textbooks Are All You Need." This approach underscores a commitment to using high-quality, educational content that lays a foundation for more effective learning and comprehension by the model. 
+
+
+Phi-2 as the most trending model on HuggingFace as of 28/12/2023, source: https://huggingface.co/models
+Complementing this focus on quality, the training dataset of Phi-2 is also marked by its inclusion of synthetic data, specifically tailored to impart common sense reasoning and general knowledge to the model. Covering a wide array of subjects, from science to daily activities and theory of mind, this synthetic data enriches the model's understanding and responsiveness. Moreover, Phi-2's training leverages a diverse array of web data, meticulously filtered to ensure educational value and content integrity. Additionally, Phi-2 benefits from a unique scaled knowledge transfer method, building upon the embedded knowledge of its predecessor, Phi-1.5. 
+
+Performance
+Phi-2 performs similarly to models like Mistral 7B and even Llama 13B on various benchmarks. Its performance occasionally reaches the level of Llama 70B, particularly in tasks that demand multi-step reasoning, such as coding and math. While not the pinnacle of open-source models, as Mixtral 8x7b currently leads that space, Phi-2's capabilities in its size category are unparalleled, marking it as a powerhouse capable of driving the trend towards on-device LLMs due to its efficiency.
+
+
+The performance of Phi-2 compared to Llama-2 and Mistral, source: https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/
+
+Phi-2's performance on physics task, source: https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/
+Phi-2's stature in the realm of open-source models is notable, yet it is also important to acknowledge that closed-source models like Google's Gemini and OpenAI's GPT-4 still maintain a lead in performance. This, however, does not detract from the significance of Phi-2's achievements in showcasing how smaller models can be optimized to deliver high-level performance​​.
+
+On-device LLMs
+The shift to on-device LLMs is an important trend in AI. It is driven by the desire for faster, more private, and more reliable AI interactions. Crucial to this shift is the need for smaller, yet powerful models that can operate efficiently within the limited resources of personal devices and Phi-2 is perfect for that!
+
+On-device processing significantly reduces latency, allowing for quicker responses essential in real-time applications. It also enhances privacy, as data is processed locally rather than sent to a remote server, mitigating data breach risks. Additionally, this approach lessens bandwidth demands and the need for constant internet access, making AI more accessible in areas with limited connectivity.
+
+Limitations
+Phi-2, while impressive in its capabilities, does not undergo the refinement process of fine-tuning or reinforcement learning from human feedback (RLHF). This means it hasn't been explicitly trained to align its outputs with human values or preferences, a step that can enhance a model's applicability for specific user needs and improve its nuanced understanding of complex tasks. This is not necessarily a bad thing, just something to keep in mind when using the model. 
+
+In terms of programming proficiency, Phi-2's expertise is concentrated around Python, using common libraries. Its performance may not be as strong when dealing with other programming languages or when Python code requires less common libraries. Users relying on Phi-2 for diverse coding tasks should be prepared for a potential need to validate and adjust outputs.
+
+Verbosity is another noted limitation of Phi-2. Trained predominantly on textbook data, the model is inclined to produce responses that are thorough but can be more verbose than necessary. This tendency towards lengthier outputs could impact the model's utility in applications where brevity and conciseness are valued, such as conversational AI or information extraction tasks where succinct answers are preferable.
+
+Conclusion
+Microsoft's Phi-2 model represents a significant shift in the landscape of Large Language Models, challenging the notion that bigger models always equate to better performance. With its 2.7 billion parameters, Phi-2 rivals the performance of much larger models like Llama and Mistral, underscoring the power of its meticulously curated 'textbook-quality' training dataset. While it has its limitations, such as a lack of fine-tuning and verbosity in responses, its efficiency and smaller size make it an ideal candidate for on-device AI applications. 
+
+Learn more
+
+© Predli AB 2019-2024
+COMPANY
+About
+Careers
+Privacy Policy
+Contact Us
+SERVICES
+Masterclasses & Workshops
+Tech & Product DD
+Tech Strategy
+Implementation
+VENTURE PORTFOLIO
+Incubated ventures
+Investments

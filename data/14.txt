@@ -1,0 +1,69 @@
+SEARCH
+ABOUT
+Maginative
+SIGN IN
+Subscribe
+Trending:
+OPENAI
+GOOGLE
+META
+MICROSOFT
+MISTRAL
+MICROSOFT
+Microsoft Releases Phi-2: A Surprisingly Powerful 2.7B Parameter Language Model
+Phi-2 matches or exceeds far larger models like the 7B Mistral, 13B Llama-2, and even 70B Llama-2 on select benchmarks.
+
+Chris McKay
+CHRIS MCKAY
+DECEMBER 12, 2023 • 2 MIN READ
+Microsoft Releases Phi-2: A Surprisingly Powerful 2.7B Parameter Language Model
+Image Credit: Maginative
+Microsoft today released Phi-2, a 2.7 billion parameter language model first announced by CEO Satya Nadella at Ignite last month. Phi-2 demonstrates remarkable capabilities typically seen only in models at least 5 to 25 times its size. The model showcases state-of-the-art performance among base language models with under 13 billion parameters on complex benchmarks measuring reasoning, language understanding, math, coding, and common sense.
+
+
+Averaged performance on grouped benchmarks compared to popular open-source SLMs.
+Phi-2 owes its surprising abilities to Microsoft's focus on high-quality training data and innovations in efficiently scaling model knowledge. By training on carefully curated "textbook-quality" data designed to teach knowledge, combined with techniques to transfer learned insights from smaller to larger models, Phi-2 breaks conventional scaling laws.
+
+Traditionally, the prowess of language models has been closely tied to their size, with larger models boasting more impressive capabilities. However, Phi-2 turns this idea on its head. It not only matches but in some instances, outperforms models up to 25 times its size.
+
+Phi-2 matches or exceeds far larger models like the 7B Mistral, 13B Llama-2, and even 70B Llama-2 on select benchmarks. It also matches or outperforms the recently-announced Google Gemini Nano 2, despite being smaller in size. Tests were extensive, spanning reasoning tasks, language comprehension, mathematics, coding challenges, and more.
+
+
+Comparison between Phi-2 and Gemini Nano 2 Model on Gemini’s reported benchmarks.
+Microsoft credits Phi-2's performance at its small scale to two key insights:
+
+Training data quality plays a critical role in model capabilities. By focusing on high-quality "textbook" data purposefully geared toward teaching reasoning, knowledge, and common sense, Phi-2 learns more from less.
+Techniques like embedding knowledge from smaller models helped efficiently scale model insights. Starting from the 1.3B Phi-1.5, Microsoft used methods like knowledge transfer to successfully unlock 2.7B Phi-2's surprisingly strong abilities without needing exponentially more data.
+Notably, Phi-2 achieves its strong performance without undergoing alignment techniques like reinforcement learning from human feedback or instructional fine-tuning which are often used to improve model behavior. Yet despite the lack of these alignment strategies, Phi-2 still demonstrated superior safety with regard to mitigating toxicity and bias compared to other available open-source models that did utilize alignment. Microsoft suggests this improved behavior stems from their tailored data curation methodology. The ability to develop capable yet safer models through data selection alone has promising implications as the industry continues to grapple with risks like problematic model outputs.
+
+The efficiency of Phi-2 makes it an ideal playground for researchers to explore critical model development, like enhancing interpretability, safety, and ethical development of language models. Microsoft has released access to Phi-2 on the Azure model catalog to promote research into such areas while enabling new applications of natural language processing.
+
+Recent Articles
+Reddit Signs Deal With AI Company to License User Content
+AI TECH
+Reddit Signs Deal With AI Company to License User Content
+Chris McKay
+Chris McKay• February 20, 2024 • 2 min read
+This deal leverages surging investor appetite for opportunities in the AI space. As models like ChatGPT and Anthropic continue to capture headlines, many startups are trying to leverage the AI boom in some capacity to inflate their value.
+Bioptimus Raises $35M Seed Funding to Build Biology Foundation Models
+VENTURE CAPITAL
+STARTUPS
+BIOTECH & HEALTH
+Bioptimus Raises $35M Seed Funding to Build Biology Foundation Models
+Richard Banfield
+Richard Banfield• February 20, 2024 • 1 min read
+Bioptimus’ mission is to accelerate innovation in biomedicine using the latest advancements in AI, specifically large language models.
+Adobe Brings AI Assistant to Acrobat to Unlock Document Insights
+ADOBE
+AI TECH
+Adobe Brings AI Assistant to Acrobat to Unlock Document Insights
+Chris McKay
+Chris McKay• February 20, 2024 • 1 min read
+The AI Assistant aims to simplify the process of managing extensive documents by providing summaries, insights, and the ability to interact with content in a more intuitive, conversational manner.
+
+Need help with AI? Hire us
+About
+Privacy
+Terms
+Copyright
+© 2004 – 2024 Maginative. All rights reserved.

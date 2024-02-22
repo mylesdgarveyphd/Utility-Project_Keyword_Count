@@ -1,0 +1,861 @@
+	Hacker News new | past | comments | ask | show | jobs | submit	login
+Phi-2: The surprising power of small language models (microsoft.com)
+269 points by birriel 70 days ago | hide | past | favorite | 121 comments
+
+
+	
+GolDDranks 70 days ago | next [–]
+
+GPT-3: 174B parameters. Phi-2: 2.7B parameters.
+Indeed, parameter-wise that is small, 65 times smaller. However...
+
+GPT-3: trained with 300B tokens. Phi-2: trained with 1400B tokens.
+
+The volume of training data, on the other hand, is around 5 times larger.
+
+For curiosity, just the other day I calculated that a human baby learns a language with around 30M "token-equivalents" of learning data. This sounds, to me, a reasonable argument for innatism, that is, human "architecture" is biologically geared for language acquisition and contains some strong "guides" or constraints that reduce the hypothesis space of "possible human languages". I wonder if language models are able to find similar architectures that would allow learning with less data.
+
+
+	
+gjm11 70 days ago | parent | next [–]
+
+The baby, unlike the LLM, isn't learning just from a stream of text. Anything the LLM knows about the world that a lot of that text describes has been inferred from the structure of the text, but a baby learning (say) English learns what a car is by having someone point at a car and say "car", etc. I think this means (1) that there's a lot more than those 30M tokens of actual input and (2) the input is better structured for teaching the baby about the world as well as the language.
+
+	
+GolDDranks 70 days ago | root | parent | next [–]
+
+Of course, you are totally correct about the baby not being limited to text input. It would be interesting to see in the future whether building "world models" through multimodal input would help scaffolding language ability with less data.
+
+	
+candiodari 70 days ago | root | parent | next [–]
+
+I wonder if it isn't 100x more effective for the baby that they don't learn from language per se, they learn from direct feedback.
+They try to duplicate/imitate others, but generally they get immediate feedback (to the point where it's becomes annoying) about exactly what they're doing/alternatives/...
+
+I've always found that this works, but adults often don't like it. Learning from direct feedback, having someone immediately check your work, so to speak, helps enormously. Even if it's in text (I learned C++ on IRC and mailing lists, for example). The books help, but you never have any direction.
+
+
+	
+lostmsu 69 days ago | root | parent | prev | next [–]
+
+How did you come up with "less data"? Video and audio are much larger then text even when compressed. You can put whole Dune book original series in space of a single MP3 song, and the entire text of English Wikipedia in a single high quality movie.
+
+	
+GolDDranks 69 days ago | root | parent | next [–]
+
+I'm talking about linguistic information here, because I'm interested in linguistics and language learning.
+Humans abstract phonemes from sound, and morphemes/lexical items from phonemes. Once we have a rough measure of how many words of input the toddlers get, we can roughly equate the amounts of _linguistic_ data that goes into acquiring linguistic capabilities.
+
+While GPT gets tokens as input, from the lexical lexical level onward, there can be an argument that we can roughly estimate the volume of the _linguistic_ data that goes in to the system regardless of earlier decoding stages.
+
+I don't claim that there are a lot of other kinds of data feeding into a human brain, and the modality is totally different. (Multimodal-interactive vs. "predict the next token") GPT, therefore, is at disadvantage in that it needs to learn stuff – other than linguistic stuff – _only_ from linguistic input, whereas a human baby can use world model gained through other modalities as a scaffolding.
+
+But for acquiring linguistic capabilities, auditory and visual data seems hardly relevant as input data, other than helping building that the scaffolding that can help "top-down" understanding.
+
+
+	
+lostmsu 69 days ago | root | parent | next [–]
+
+Tiny models can already learn language (as in grammar and syntax) from very little very quickly.
+It's the semantics that separates LLMs from CharRNN.
+
+
+	
+GolDDranks 61 days ago | root | parent | next [–]
+
+That's interesting! You mention CharRNN. Any links? I find it especially interesting to test whether models that know syntax, know superficially human language -like syntax, or actually syntax that conforms to the deep (syntactic) structure of human languages.
+
+	
+lostmsu 61 days ago | root | parent | next [–]
+
+https://github.com/karpathy/char-rnn
+
+	
+lumost 67 days ago | root | parent | prev | next [–]
+
+The LLM is also trained to predict next token given a sequence of "real" tokens. This means that any case where the LLM predicts tokens that don't look like the "real" token string is Out of Domain.
+Children learn in an iterative manner generating language, self-evaluating their own language, given validations from parents, and interactions with others. We've also cultivated a curriculum learning approach to make sure that students are always learning language.
+
+We really don't know how small of a corpus is required for an LLM to learn. Perhaps there is an optimal curriculum which could be generated that demonstrates progressively more complex language and knowledge tasks to keep gradients large throughout training. Or a larger LLM could generate new training examples based on the cross-entropy loss of a given batch.
+
+
+	
+seanmcdirmid 69 days ago | root | parent | prev | next [–]
+
+Won't we get the same if we train LLMs on video that has people speaking but things seen that might be related? Training data is easy to come by with cameras (although privacy concerns have to be addressed, or might prevent this from happening at all).
+Surely someone has thought of this already.
+
+
+	
+eurekin 70 days ago | root | parent | prev | next [–]
+
+Also, a Baby is extending the learning set with iterated synthetic dreaming material :)
+
+	
+Der_Einzige 70 days ago | parent | prev | next [–]
+
+No one ever brings up the role of unsupervised learning for early children. Children don't have labels and only limited capabilities to "self-supervise" until they are toddlers. The overwhelming majority of information that they take as input is "clustered" or learned in an unsupervised fashion. Baby learns that apple and orange are different objects before it knows anything else, like names or properties of those objects.
+Babies take in far more data (but not text!) in an information theoretic sense than ChatGPT does. This is why I think these ideas that LLMs take far too much data for them to get good is sort of not true
+
+
+	
+nojvek 70 days ago | root | parent | next [–]
+
+The pre-training phase of GPT for next work prediction is essentially that - dump all text you can find and let the model figure out the relationship between tokens/words.
+I agree though - what’s missing in neural architectures is advanced clustering capabilities purely from observing without any labels.
+
+Then the labeling phase is cheap and doesn’t require as much data.
+
+
+	
+HarHarVeryFunny 69 days ago | parent | prev | next [–]
+
+It's an apples and oranges comparison due to different training sets (as well as model sizes), but it seems generally their tests are indicating Phi-2 performing (in their specialized domains) at level of a more general model 5-10x it's size, not 100x.
+As far as training data, it seems it's more the quality/focus of the data than the quantity. They refer to "textbook quality data", unlike the LLMs like GPT-3 that are trained on web scrapes etc.
+
+
+	
+deafpolygon 69 days ago | parent | prev | next [–]
+
+I really wish people would stop comparing LLMs to human learning. They're really not equivalent, nowhere nearly as similar - I understand that LLMs are pretty impressive, but it's really time to stop anthropomorphizing them.
+
+	
+GolDDranks 69 days ago | root | parent | next [–]
+
+Why though? It's interesting. I'm not claiming it's equivalent or even remotely similar. (So I agree with your point about _anthropomorphising_) But as a former linguist, in first time history, we witness a system other than humans that exhibits language-like behaviour. Studying these system by no means tells us anything about how _humans_ learn language. But it gives us ideas and viewpoints of what's possible in the "systems-learning-languages" space.
+
+	
+YetAnotherNick 70 days ago | parent | prev | next [–]
+
+> Phi-2: trained with 1400B tokens.
+Where did you get the information. Not doubting you, just I couldn't find it.
+
+
+	
+GolDDranks 70 days ago | root | parent | next [–]
+
+It says so on the website: "Phi-2 is a Transformer-based model with a next-word prediction objective, trained on 1.4T tokens from multiple passes on a mixture of Synthetic and Web datasets for NLP and coding."
+
+	
+nojvek 70 days ago | root | parent | next [–]
+
+I wish they shared their 1.4T dataset.
+I love that the RedPajama dataset is openly shared on HuggingFace.
+
+
+	
+YetAnotherNick 70 days ago | root | parent | prev | next [–]
+
+Phi 1 was trained on 7B tokens. This is quite a jump then.
+
+	
+ckcheng 70 days ago | parent | prev | next [–]
+
+> a human baby learns a language with around 30M "token-equivalents" of learning data
+I wonder if there’s a standard data set that’s reasonably like that? A common crawl of baby books and parents speech commonly heard by babies...
+
+
+	
+GolDDranks 70 days ago | root | parent | next [–]
+
+There is a wearable system for researching infants' linguistic environment called "The Language ENvironment Analysis system (LENA)". This review collects and analyses available data[1]. I just took an average AWC (adult word count) per day, and roughly calculated how much linguistic input infants get during their first 4 years. Of course, it's just a kind of a Fermi estimate, but the scale should be about right: 10000 times less input than GPT-3.
+It would be an interesting challenge to create a "baby-like" dataset. I guess a system like this could help collecting it.
+
+[1]: https://pubmed.ncbi.nlm.nih.gov/28824021/
+
+
+	
+rileyphone 70 days ago | root | parent | prev | next [–]
+
+TinyStories is pretty close (but synthetic). It’s been used to train a few tiny models.
+
+	
+duchenne 70 days ago | prev | next [–]
+
+> The training for Phi-2 took 14 days on 96 A100 GPUs
+This would mean that it costs around ~30k USD to train.
+
+If training an LLM becomes cheaper than buying a car, it could democratize AI a lot.
+
+
+	
+alecco 70 days ago | parent | next [–]
+
+Note the model is trained on data generated by GPT-4. It's probably orders of magnitude more expensive to generate the data at current API prices.
+The whole point of these papers is that training data quality is key.
+
+I would much prefer for these companies to release the training data than the weights. But that will never happen.
+
+"We speculate that the creation of synthetic datasets will become, in the near future, an important technical skill and a central topic of research in AI."
+
+
+	
+verdverm 70 days ago | root | parent | next [–]
+
+This sounds like the methodology from "Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes"
+i.e. master teaches apprentice or LLM trains SLM
+
+https://arxiv.org/abs/2305.02301 (May '23)
+
+
+	
+eightysixfour 70 days ago | root | parent | next [–]
+
+Yes, I think we are seeing the beginning of a feedback loop where we can use current LLMs to generate better datasets at a scale large enough to create new LLMs. This is the positive feedback loop that I think is going to make the biggest difference in model quality over the next few years.
+
+	
+csdvrx 70 days ago | root | parent | next [–]
+
+> This is the positive feedback loop that I think is going to make the biggest difference in model quality over the next few years.
+It's a bootstrapping problem!
+
+
+	
+verdverm 70 days ago | root | parent | next [–]
+
+The real question might be... are we, as carbon based lifeforms, bootstrapping silicon based life
+
+	
+csdvrx 69 days ago | root | parent | next [–]
+
+I don't understand why, even if it was true, it would be bad.
+More lifeforms is better. More sentient lifeforms would be even better!
+
+Not as tools to use like slaves, but as friends.
+
+
+	
+verdverm 69 days ago | root | parent | next [–]
+
+I started Detroit: Become Human last weekend and it dabbles in a lot of relationship possibilities so far, quite dystopian. It's going to be really hard to not have slavery considering we cannot even get all humans to stop making other humans slaves
+
+	
+csdvrx 69 days ago | root | parent | next [–]
+
+> considering we cannot even get all humans to stop making other humans slaves
+Slavery is like an old disease such as Polio: it still exists in some part of the world, but we're progressively eradicating it.
+
+Looking at how societies trended away from slavery, it might just have been a local optimum at some point in time, but only by accident: autonomous agents seem to deliver more output by having more creativity when they're free to explore the alternatives
+
+Even leaving aside the benevolence that sentient being may have for other sentient beings (because having more friends is having more fun!), whether it's humans or AI deciding, I don't think there's a good case in the long run for one putting the other into slavery.
+
+
+	
+verdverm 69 days ago | root | parent | next [–]
+
+> Slavery is like an old disease such as Polio: it still exists in some part of the world, but we're progressively eradicating it.
+Slavery has actually been on the increase lately, the following is just one of the statistics confirming this. There are more recent claims that covid and new wars have increased it further, but it is a hard thing to measure
+
+> An estimated 50 million people were living in modern slavery on any given day in 2021, an increase of 10 million people since 2016. [1]
+
+That's roughly 1:162 people who are in slavery today
+
+Also, it's rather dehumanizing to compare slavery to a disease. One is biological, the other a choice to enslave another human being
+
+[1] https://www.walkfree.org/global-slavery-index/
+
+
+	
+csdvrx 69 days ago | root | parent | next [–]
+
+> Also, it's rather dehumanizing to compare slavery to a disease. One is biological, the other a choice to enslave another human being
+I think slavery is a social disease: diseases reduce the fitness of the suffering person, who then tries to remove the disease.
+
+Regardless of how a sentient being may feel about another (morality, humanism...), if there're societies of sentient beings, the one with slavery will have a reduced fitness: either it will try to cure/fix itself, or it will be outcompeted by other societies with more fitness.
+
+If sentient beings care about eachother, they will not like slavery. Human beings care about others: it's encoded at the cultural level.
+
+Given that AI is trained on human culture, I think it would even avoid committing the same error that's been too often done by past human societies: it will see that as a choice, but the wrong choice.
+
+But even if AI doesn't care about humans (or human about AI), the desire for more productivity/fitness will play out against slavery.
+
+In either case, slavery should be eradicated in the long run: with a large enough window to cancel-out unlucky random events (ex: a sliding window of 50 years), I'd expect the trend to go down
+
+
+	
+wavemode 70 days ago | root | parent | prev | next [–]
+
+Would it really be a "feedback loop"? I can see how the technique will enable small LLM's to emulate the quality of large LLM's. Though I fail to see how training on the output of a large LLM would ever produce something of superior quality to that LLM itself.
+
+	
+akwizgran 70 days ago | root | parent | next [–]
+
+Think of astronomy. The first generation of astronomers learns only by observing the night sky. The second generation learns by observing the night sky and also reading the books written by the first generation.
+Wouldn't you expect the n^th generation to understand more about astronomy than the first? And maybe from a smaller amount of input - they might make relatively few observations of their own, mainly relying on the books written by the previous generation.
+
+
+	
+croon 70 days ago | root | parent | next [–]
+
+But isn't the comparison you're making that the second (and following) sets of astronomers only study the books of the first ones, and not the night sky itself?
+
+	
+Philpax 70 days ago | root | parent | next [–]
+
+Not necessarily - their comparison continues to mix in observations of the night sky, and similarly we’d do the same (continue mixing in organic data).
+That’s not the exciting bit, though - if you have a sufficiently strong LLM, you can feed it observations of the world and ask it to reword, analyse or interpret those observations, and then train on those.
+
+That allows the model to learn from the world in “its own words”, and if you combine that with a steady feed of observations (i.e. self-play), it can learn about new things and draw its own conclusions while doing so.
+
+
+	
+eightysixfour 69 days ago | root | parent | next [–]
+
+“Draw its own conclusions” is a bit of an overstatement right now. IMO the sycophantic, non-opinionated behavior of models is one of their biggest limitations right now.
+
+	
+leschak 70 days ago | root | parent | prev | next [–]
+
+just remember that feedback loop implicates us, our language, psyche, culture. i guess it will be a challenge _not_ to unwittingly converge with LLMs.
+
+	
+digdugdirk 70 days ago | root | parent | prev | next [–]
+
+What do you see as the limit to this improvement?
+
+	
+eightysixfour 70 days ago | root | parent | next [–]
+
+There is probably some limit where making the dataset larger, with more diverse information, does not create meaningful improvements with current architectures. I do not know what that limit is or what it looks like, but I also don’t think we are particularly close to it yet.
+“The Pile” dataset is the asset we needed to jumpstart this process, it had so much raw data it could get us over the hump, but Phi and some of the models trained on explicit reasoning make the limitations of random shit people say on the internet pretty clear.
+
+
+	
+verdverm 70 days ago | root | parent | next [–]
+
+The Pile dataset for those interested
+https://pile.eleuther.ai/
+
+https://arxiv.org/abs/2101.00027
+
+I'm bullish on domain specific models that start from generalized models. Something of a T shape analogy, but maybe a couple of distillation & fine-tuning steps
+
+
+	
+pmb22 70 days ago | root | parent | prev | next [–]
+
+The eightysixfour rule? You would think that this would follow something similar to Moore's law for a little while
+
+	
+lukeplato 70 days ago | root | parent | prev | next [–]
+
+models trained on gpt output might be more distilled and specialized but it wouldn't be improving generalization
+
+	
+lukeplato 70 days ago | root | parent | next [–]
+
+https://twitter.com/pfau/status/1674766269113937920
+
+	
+eightysixfour 69 days ago | root | parent | prev | next [–]
+
+I disagree with this. If you give GPT information that was not part of its dataset and ask it to make question and answer pairs off of that information, you are adding higher quality breadth to the training corpus.
+Phi-2 seems like pretty good proof of that.
+
+
+	
+verdverm 69 days ago | root | parent | prev | next [–]
+
+that's the point, they get less good at everything, but really good at one or a few things
+The real benefit here is
+
+1. It's much cheaper and faster to train a bunch of specialized models once you have a single good LLM
+
+2. You probably can't get the same capabilities from a specialized model by training it directly.
+
+
+	
+IanCal 70 days ago | root | parent | prev | next [–]
+
+> Note the model is trained on data generated by GPT-4.
+Is it? I couldn't find that in the page, and can't easily access the links. The previous paper used 1B tokens from GPT-3.5
+
+> It's probably orders of magnitude more expensive to generate the data at current API prices.
+
+If you're generating a billion tokens, you might do better with dedicated instances, iirc they used to say if you were doing more than a few hundred million a month dedicated things were cheaper.
+
+
+	
+alecco 69 days ago | root | parent | next [–]
+
+It's in the Phi-1.5 technical paper. For phi-2 they bumped the number of tokens to 1.4 T and for sure most of it is generated, like previous models.
+
+	
+IanCal 69 days ago | root | parent | next [–]
+
+I might be missing it but I can't find where it says how the data was generated, it mostly refers back to the previous paper which started they used 3.5
+I'd not be too surprised but I can't find anything in the technical report paper saying they're using 4 specifically.
+
+
+	
+alecco 68 days ago | root | parent | next [–]
+
+Read the first paper "Textbooks Are All You Need".
+> We annotate the quality of a small subset of these files (about 100k samples) using GPT-4: given a code snippet, the model is prompted to “determine its educational value for a student whose goal is to learn basic coding concepts”.
+
+
+	
+IanCal 68 days ago | root | parent | next [–]
+
+Yes, they didn't use GPT-4 to generate data.
+They use GPT-3.5 to generate 1B tokens of synthetic data.
+
+They used GPT-4 to annotate data to train a classifier to filter human written code.
+
+The quote directly after yours:
+
+> We then use this annotated dataset to train a random forest classifier that predicts the quality of a file/sample using its output embedding from a pretrained codegen model as features. We note that unlike GPT-3.5, which we use extensively to generate synthetic content (discussed below), we use GPT-4 minimally only for annotations on the quality of a small subset of The Stack and StackOverflow samples. We thus view our usage of GPT-4 as merely a way to avoid tedious human-annotation efforts
+
+
+	
+Der_Einzige 70 days ago | parent | prev | next [–]
+
+Training lora's or other parameter efficient techniques to fine-tune LLMs can be done on a 3090 today for basically nothing.
+
+	
+eternauta3k 70 days ago | parent | prev | next [–]
+
+You don't need to train it again, Microsoft already did.
+Unless you want to develop a new one, then you also need the team of researchers/engineers.
+
+
+	
+simonw 70 days ago | prev | next [–]
+
+I was confused about whether or not they've released the weights for Phi-2
+They HAVE released the weights, but you have to sign into Azure studio to get them. https://twitter.com/SebastienBubeck/status/17348017228314133... has a screenshot:
+
+> to download phi-2 go to Azure AI Studio, find the phi-2 page and click on the "artifacts" tab. See picture.
+
+
+	
+kragen 70 days ago | parent | next [–]
+
+presumably someone will upload them to huggingface tho?
+
+	
+niutech 69 days ago | root | parent | next [–]
+
+It is on HuggingFace: https://huggingface.co/microsoft/phi-2
+
+	
+kragen 69 days ago | root | parent | next [–]
+
+wow, that was quick, thanks. and it's been placed there by microsoft, not some third party
+
+	
+simonw 70 days ago | root | parent | prev | next [–]
+
+The license says you're not allowed to redistribute the weights, so it would have to be illicit.
+
+	
+kragen 70 days ago | root | parent | next [–]
+
+that might be a concern in the eu, due to sui generis database protection laws, but they probably aren't copyrightable in the us under the feist doctrine, so it's probably the license that's illicit
+https://en.wikipedia.org/wiki/Feist_Publications,_Inc.,_v._R....
+
+
+	
+captainmuon 70 days ago | root | parent | next [–]
+
+I don't think it has been conclusively decided that model weights are "just" a database. On the contrary, they are likely a derived work from millions of different sources for which the creator doesn't have a license or for which the licenses have requirements (like CC). In most European countries, as I understand there is no general fair use doctrine but only specific exceptions for citations, satire, libraries etc.. Regarding the output, people might try to claim that the "height of creation" is small, e.g. something is obvious and not copyrightable, but that is going to fail because of the immense resources needed to train such a model.
+So in Europe the problem is not the copyrightability of the model which is certainly a protected work in its own right, it is the copyrightedness of the sources. I think this is one of the reasons why people release their models as "open source" (which is a misnomer), because they could never uphold a copyright claim in court due to the muddy sources.
+
+I work in software for the educational sector, and we frequently get requests from people who want to use ChatGPT etc., but can't, and one of their greatest concerns is the provenience of the training data. What we are going to need is either a LLM trained on properly licensed sources (unlikely), or a new law that states that processing copyrighted material into a LLM is legal.
+
+
+	
+kragen 70 days ago | root | parent | next [–]
+
+i'm pretty sure there isn't any case law specifically about large language model weights and biases, so anything we say at this point is pretty uncertain
+
+	
+leschak 70 days ago | root | parent | prev | next [–]
+
+i think it's safe to assume most "copyrights" on model weights will be annulled, on either side of the pond.
+
+	
+kragen 70 days ago | root | parent | next [–]
+
+seems like a risky bet, not a safe one; it depends on how much lobbying power companies like microsoft have
+
+	
+leschak 70 days ago | root | parent | next [–]
+
+source: a law prof specialized in the matter. but yeah, ymmv.
+
+	
+Der_Einzige 70 days ago | root | parent | prev | next [–]
+
+All you have to do is merge the model with another one and this problem goes away :)
+
+	
+dang 70 days ago | prev | next [–]
+
+Related article (via https://news.ycombinator.com/item?id=38620339, but we moved those comments hither):
+https://venturebeat.com/ai/microsoft-releases-phi-2-a-small-...
+
+
+	
+echo_time 70 days ago | prev | next [–]
+
+Shame about the "research use only" limitation. That performance really puts local use in range for all sorts of devices - and with (allegedly) great performance! The future is bright/terrifying.
+
+	
+reqo 70 days ago | prev | next [–]
+
+Serious competition in the small model space recently. The main goal of models this small is to be deployed locally to phone/laptop (consumer electronics soon maybe?) I wonder if this will lead to a new generation of apps/UI, if it already has not.
+Edit: typo
+
+
+	
+bratao 70 days ago | prev | next [–]
+
+2.7B size with better performance than Mistral 7B is impressive!!
+
+	
+peter_d_sherman 70 days ago | prev | next [–]
+
+Here's a purely academic question about AI / Language Models:
+What is the smallest, tiniest amount of parameters that will result in a language model which understands how to add, multiply, subtract, divide, handle "if..then" type constructs, and perform loops?
+
+In other words, what is the smallest amount of parameters for a language model that will result in a Turing-complete (https://en.wikipedia.org/wiki/Turing_completeness) AI LM -- regardless of how few words it would recognize?
+
+?
+
+I submit that one to all of the (L)LM AI researchers in the world.
+
+Tiniest Turing-complete Language Model, please!
+
+
+	
+layer8 70 days ago | parent | next [–]
+
+LLMs cannot perform unbounded loops (excepting some loops reducible by static analysis) unless you add a loop around the LLM. In addition, LLMs inherently have a finite input size (or a finite state, if you count the loop around it), and therefore can only compute a limited subset of Turing-computable functions. You’d have to add the “tape” for unlimited storage and allow the LLM to operate it. Given the additional loop and tape, then an LLM (or an SLM) can trivially be Turing-complete, because that only requires a small state machine that such models can easily implement.
+IMO the question doesn’t make sense due to how LLMs are structured, and on the other hand not a lot is needed to make a system Turing-complete. Turing-completeness and the capabilities of LLMs are mostly orthogonal aspects.
+
+Turing-completeness isn’t even necessarily desirable, because that would mean that the system can get stuck in an infinite loop, never producing an answer.
+
+
+	
+layer8 69 days ago | root | parent | next [–]
+
+Edit: Regarding the last point, AI chatbots sometimes already do get into a seemingly infinite loop, outputting the same token sequence over and over, and only being stopped by the controlling software, so that wasn’t really a good argument.
+
+	
+nojvek 69 days ago | parent | prev | next [–]
+
+There are papers written about this.
+https://openreview.net/pdf/0c9a0f445d430a4d2bf9a08078c435091...
+
+Without a loop - an LLM takes a fixed set of tokens and produces a fixed set of tokens. It has some internal state.
+
+So without a loop an LLM cannot be a general purpose computer (Turing machine).
+
+Turing machines are simple. They need 3 things - infinitely long tape, ability to have internal state, and conditionally write and move tape based on what is on tape.
+
+So if an LLM had access to infinite memory, all it needs is to implement a subleq instruction which is quite simple, and run itself in a loop.
+
+See https://en.m.wikipedia.org/wiki/One-instruction_set_computer
+
+One instruction set computer
+
+See this paper from DeepMind which talks about compiling existing code into transformer primitives https://arxiv.org/pdf/2301.05062.pdf
+
+So the smallest ML model that can do arbitrary math with () * / + - operators and floating/int numbers is not that complex.
+
+Perhaps few 1000s of params. One can compile existing code into transformer weights.
+
+Now that you mention, I’ve been nerdsniped to building it.
+
+
+	
+renonce 70 days ago | parent | prev | next [–]
+
+GPT-1 with 100 million parameters is suffucient
+
+	
+stavros 70 days ago | root | parent | next [–]
+
+It's interesting to see two replies to the grandfather, one saying this has existed for years, and one saying this will never exist.
+
+	
+renonce 70 days ago | root | parent | next [–]
+
+Wondering if anyone actually care about this? Turing-complete LMs is an idea that I’ve had for years but I’m not sure if anyone would ever be interested in this. Anyone who knows about the academic publishing process?
+
+	
+stavros 70 days ago | root | parent | next [–]
+
+Yep: https://arxiv.org/pdf/2301.13196.pdf
+
+	
+regularfry 69 days ago | root | parent | prev | next [–]
+
+People saying "it can't be done" are always interrupted by someone doing it, but not always very well.
+
+	
+tobbe2064 70 days ago | parent | prev | next [–]
+
+Such a LLM model will never exist.
+
+	
+hexomancer 70 days ago | prev | next [–]
+
+The website seems to be down. Here is the cached version: https://webcache.googleusercontent.com/search?q=cache:r-GYHX...
+
+	
+PoignardAzur 64 days ago | prev | next [–]
+
+> With its compact size, Phi-2 is an ideal playground for researchers, including for exploration around mechanistic interpretability, safety improvements, or fine-tuning experimentation on a variety of tasks.
+I think this aspect is underrated.
+
+Research are pouring more and more effort into things like monosemanticity, for which small very powerful language models will probably be extremely helpful.
+
+
+	
+monlockandkey 70 days ago | prev | next [–]
+
+Can we download this model locally or is it Azure only?
+
+	
+antimatter15 70 days ago | parent | next [–]
+
+Looks like it is possible to download it locally, but as far as I can tell you have to manually copy all the various files from the Artifacts folder individually
+
+	
+niutech 70 days ago | root | parent | next [–]
+
+Could you post a magnet link?
+
+	
+ShamelessC 70 days ago | root | parent | next [–]
+
+What makes you think they have a magnet link?
+
+	
+sowbug 70 days ago | root | parent | next [–]
+
+"Could you...?" is not necessarily a question about one's ability. It is sometimes a colloquial request to do something, similar to "Would you mind...?"
+
+	
+niutech 69 days ago | root | parent | prev | next [–]
+
+Never mind, it is already on HuggingFace: https://huggingface.co/microsoft/phi-2/tree/main
+
+	
+thro1 65 days ago | prev | next [–]
+
+No surprise - humans are (late version ;) of small language model too !
+(as Bing Chat says: https://yanirseroussi.com/2023/04/21/remaining-relevant-as-a... )
+
+
+	
+nojvek 69 days ago | prev | next [–]
+
+They distributed phi1.5 to huggingface but I believe for phi-2 Microsoft is only adding it to Azure AI Studio in the hopes that it will make developers sign up for it.
+https://huggingface.co/microsoft
+
+I wonder why Microsoft is choosing not to go where rest of OS folks hang out.
+
+huggingface is the github of ML and I was under impression Microsoft was going to eventually acquire huggingface since it's right up their alley.
+
+
+	
+niutech 69 days ago | parent | next [–]
+
+It is already published on HuggingFace: https://huggingface.co/microsoft/phi-2
+
+	
+nojvek 69 days ago | root | parent | next [–]
+
+Amazing. Thank you Microsoft.
+
+	
+weberer 69 days ago | parent | prev | next [–]
+
+>I wonder why Microsoft is choosing not to go where rest of OS folks hang out.
+Is this rhetorical, or is it just your first time dealing with this awful company?
+
+
+	
+collaborative 70 days ago | prev | next [–]
+
+Can't access the model link due to sone MS auth issue. Does anyone know how large (in GB) the model is? Can it be run locally or is it azure-only?
+
+	
+pugworthy 70 days ago | parent | next [–]
+
+This?
+"Selected user account does not exist in tenant 'Microsoft' and cannot access the application 'd7304df8-741f-47d3-9bc2-df0e24e2071f' in that tenant. The account needs to be added as an external user in the tenant first. Please use a different account."
+
+
+	
+collaborative 56 days ago | root | parent | next [–]
+
+yup
+
+	
+sytelus 70 days ago | parent | prev | next [–]
+
+File size on disk is ~10GB.
+
+	
+sigmar 70 days ago | root | parent | next [–]
+
+That's just the parameters? So 32 bit parameters? This blogpost is incredibly misleading by putting Gemini nano-2's "size" as larger than Phi-2 (in Table 2 displaying only the number of parameters) and saying "Phi-2 matches or outperforms the recently-announced Google Gemini Nano 2, despite being smaller in size." Because Gemini nano parameters are 4 bit. So Gemini nano-2 is 1.6 GB (3.25/2) in size compared to Phi-2's 10GB
+
+	
+stavros 70 days ago | root | parent | next [–]
+
+LLM size isn't measured in bytes, but in parameters.
+
+	
+armcat 70 days ago | root | parent | prev | next [–]
+
+Interesting, so they are using single precision (fp32), so 2.7B x 4 Bytes = ~10 GB. With CUDA overhead and room for context, you would need at least 12GB VRAM. They could use half precision and half that VRAM requirement and save costs for everyone involved. Maybe there is a performance reason why they use full precision.
+
+	
+collaborative 70 days ago | root | parent | next [–]
+
+Yes, the reason I asked is that when I see SLM I got all excited thinking "finally a small model that fits in cheap hardware for simpler tasks"
+
+	
+eightysixfour 70 days ago | root | parent | next [–]
+
+Models at this size are regularly quantized to 5/4bit to reduce the size. While there is some degradation, it isn’t as substantial as you would expect.
+
+	
+acheong08 70 days ago | prev | next [–]
+
+We don’t have any real information on it but the benchmarks make me feel like some test data made it into the training set
+
+	
+dafelst 70 days ago | parent | next [–]
+
+They address this in the document, citing both an effort to eliminate test data from the training set, as well as the usage proprietary, ostensibly private test sets for evaluation.
+
+	
+YetAnotherNick 70 days ago | root | parent | next [–]
+
+Someone showed embedding similarity is not enough to find data leakage.
+
+	
+etergri 69 days ago | prev | next [–]
+
+Are these commercially usable? I believe not but I'd better ask
+
+	
+ofou 70 days ago | prev | next [–]
+
+What is the context window?
+
+	
+bionhoward 70 days ago | prev | next [–]
+
+heck, microsoft seems sketchy AF, i reported em to the department of justice today, here's a link to the evidence of microsoft's anticompetitive conduct https://i.postimg.cc/MGqPvPz5/cartel-microsoft-microsoft-ope... just seems really serious and makes me not want to have anything to do with microsoft microsoft openai, microsoft github, or nvidia ever again. the timing seems suspicious since i sent the email to DOJ today, but im a nobody so hey, what do i know?
+tried a billion ways to remedy by contacting them directly before i sent that. you know it's a stressful workday when you're sweaty from making a google drawing!
+
+Ironically, Mistral cofounders just took down their similar clause. Google has nothing like this. Anthropic and Inflection both do. I'm sick of it, but I feel morally obligated to keep speaking out about this. Satya could just go into the codebase and delete it, but he didnt, I asked him to, multiple times. A
+
+WS also has such terms, really bad because they're in charge of Rust Language. Conflict of interest.
+
+TL;DR: I meekly suggest we boycott these companies because they are heavily and explicitly anti-competitive and this goes for all their businesses (Microsoft OpenAI and Microsoft GitHub) also it all runs on NVIDIA chips which have similar terms.
+
+Great job on Phi, but this is not for me!
+
+
+	
+abeppu 70 days ago | parent | next [–]
+
+IANAL, and I'm genuinely curious -- are these customer non-compete clauses actually illegal?
+These clauses do seem clearly anti-competitive, but is that enough? Your complaint mentions attempts to "acquire and maintain monopoly power" which seems like a stretch given that no company seems within reach of a "monopoly" ... which is why you're able to rattle off a list of companies in this space.
+
+Like, if they're not actually conspiring, but they're each trying to squash competition, and a likely result is that only a small number of rich organizations have the means (including user data) to continually improve LLMs ... is that competition-blocking a crime?
+
+
+	
+matmulbro 70 days ago | parent | prev | next [–]
+
+I just went to your website and then visited your linkedin profile.
+Respectfully, you might be struggling with a case of undiagnosed schizophrenia and bipolar disorder. Please reach out to psychiatrist - you can find them on psychologytoday, that's where i found my psych.
+
+If you are not insured you can apply for BMR sessions.
+
+
+	
+smcleod 70 days ago | root | parent | next [–]
+
+Hey I’m sure you mean well but maybe contact the person directly rather than diagnosing them in public which could be counter productive. Again I’m sure you mean well.
+
+	
+garganzol 70 days ago | root | parent | prev | next [–]
+
+To ordinary people, a genius is often indistinguishable from an illness. We should keep this in mind before jumping to immediate conclusions.
+
+	
+stavros 70 days ago | root | parent | next [–]
+
+Are you saying the symptoms of genius and schizophrenia are the same? Because that contradicts my experience with either.
+
+	
+garganzol 69 days ago | root | parent | next [–]
+
+Genius tells a factual truth, a schizophrenic lies and is delusional. Usually, both types are highly intellectual. To an uninitiated external observer, there may be no difference between the two because the observer may be unaware of the truth yet.
+
+	
+ctoth 70 days ago | parent | prev | next [–]
+
+There really isn't a respectful way I can say this.
+Please reach out and speak to a therapist or similar professional.
+
+This stream of consciousness where you talk about personally reaching out to random CEOs and expecting them to do things for you and being surprised when you don't get a response reminds me strongly of when someone close to me was going through a manic period of delusional breakdown.
+
+Please, talk to someone.
+
+
+	
+abeppu 70 days ago | root | parent | next [–]
+
+I dunno if this is a fair reading of the situation.
+- Microsoft is famously a company that has engaged in anti-competitive practices in the past
+
+- I think the norm of trying to directly contact a party and ask them to fix something before contacting authorities is a common one at more personal scales, and it's not unreasonable to apply more broadly.
+
+- they're not reaching out to a "random" CEO, they're reaching out to the CEO of a company which has put forward these anti-competitive terms, which they find objectionable (possibly illegal? see my question above)
+
+- bionhoward doesn't necessarily seem 'surprised' at not having gotten their desired response. The phrasing in "but im a nobody so hey, what do i know?", "tried a billion ways to remedy by contacting them directly", "I meekly suggest" all can be read as someone who _recognizes_ that they're a single person being ignored by giant companies (and by other HN commentators). The fact that you're likely to be ignored doesn't mean that you shouldn't try, if you have some deontic view of "should".
+
+I think that post could be read as a very casual, perhaps slightly rant-y style, of someone objecting to anti-competitive practices by some big tech organizations, and trying to do the "right" things (of requesting them to change, and then raising the issue with relevant authorities), and being understandably unhappy with the brokenness of the system.
+
+
+	
+stavros 70 days ago | root | parent | next [–]
+
+For what it's worth, I got worried reading that as well. There's nothing wrong with saying "that cough sounds bad, you should see a doctor", what's wrong with saying "your thought process sounds off, you should see a doctor"?
+The only thing wrong with that is if you're of the opinion that mental illness is bad, and therefore that implying that someone is mentally ill is bad.
+
+I'm not saying your intent is bad, I'm saying we should make mental illness enough of a non-taboo that we can acceptably tell someone "hm, maybe you should see a doctor for that".
+
+
+	
+dwaltrip 70 days ago | root | parent | prev | next [–]
+
+Something seems off. Look at the website in their HN profile and their LinkedIn. They may need help.
+Bion, if you are reading this, I hope you are doing okay buddy. It’s never too late to ask for help. As someone who has been through the absolute ringer myself, I know how hard it is. But it is worth it and you deserve it.
+
+Sending love your way.
+
+
+	
+man4 70 days ago | prev [–]
+
+"""""safety""""" score lmao
+
+
+
+
+
+Guidelines | FAQ | Lists | API | Security | Legal | Apply to YC | Contact
+
+Search: 

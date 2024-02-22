@@ -1,0 +1,563 @@
+Open in app
+Search
+Write
+
+Mylesgarveyphd
+
+Member-only story
+
+Phi-2: A Small Model Easy to Fine-tune on Your GPU
+Instruct fine-tuning and quantization on consumer hardware
+Benjamin Marie
+Benjamin Marie
+
+·
+Follow
+
+9 min read
+·
+Jan 2, 2024
+612
+
+
+4
+
+
+
+
+
+
+Phi-2 is the successor of Phi-1.5, the large language model (LLM) created by Microsoft.
+
+To improve over Phi-1.5, in addition to doubling the number of parameters to 2.7 billion, Microsoft also extended the training data. Phi-2 outperforms Phi-1.5 and LLMs that are 25 times larger on several public benchmarks even though it is not aligned/fine-tuned. This is just a pre-trained model for research purposes only (non-commercial, non-revenue generating).
+
+In this article, I present Phi-2 and explain why it performs better than Phi-1.5. Since properly fine-tuning the Phi models has always been somewhat challenging, I also wrote a tutorial for fine-tuning it on consumer hardware. Phi-2 is easy (easier than Phi-1.5) and cheap to fine-tune.
+
+This tutorial is also available as a notebook here:
+
+Get the notebook (#35)
+
+Phi-2: A Good Student of GPT-4
+Microsoft didn’t publish any technical report detailing Phi-2, yet. Most of what we know about the model is from Microsoft’s blog post announcing Phi-2 and its Hugging Face model card.
+
+Building upon Microsoft’s prior research on Phi-1 and Phi-1.5, Phi-2’s pre-training involved curating synthetic datasets explicitly designed for common sense reasoning and general knowledge. The training data has a large range of domains, from science to activities.
+
+In contrast with Phi-1.5 which was entirely trained on synthetic data only, Phi-2’s synthetic training corpus has been augmented with carefully curated web data. According to Microsoft, this dual-source approach aims to provide a comprehensive and refined dataset that contributes to the model’s robustness and competence. In total, the training data contains 250B tokens. Microsoft didn’t release the training data but they gave some details on the source:
+
+Source 1: NLP synthetic data created with GPT-3.5.
+Source 2: filtered web data from Falcon RefinedWeb and SlimPajama which was assessed by GPT-4.
+They heavily relied on GPT models. Phi-2 is yet another student model of GPT-3.5/4.
+
+Zephyr 7B Beta: A Good Teacher Is All You Need
+Knowledge distillation for Mistral 7B
+kaitchup.substack.com
+
+As for its architecture, Phi-2 is a Transformer-based causal model. Microsoft chose MixFormer again.
+
+During training, Phi-2 learned from 1.4 trillion tokens (i.e., 1400B/250B=5.6 training epochs). The training duration spanned 14 days and utilized 96 A100 GPUs.
+
+Despite being a non-aligned pre-trained model, Phi-2 displays improved behavior concerning toxicity and bias as shown in the following results:
+
+
+Safety scores were computed on 13 demographics from ToxiGen. A higher score indicates the model is less likely to produce toxic sentences — source
+Unfortunately, we don’t know much about how they have conducted this evaluation. We have to trust Microsoft that it has been carefully done.
+
+They have also published a comparison with other LLMs to demonstrate that Phi-2 is better on some public benchmarks.
+
+
+source
+Again, while these results look impressive, we don’t have much information: What prompts did they use? What hyperparameters? What version of the models? etc.
+
+If you want a realistic idea of how well Phi-2 performs, the only way is to conduct your own evaluation.
+
+Behind the OpenLLM Leaderboard: The Evaluation Harness
+Evaluate quantized LLMs and LoRA adapters on your computer
+kaitchup.substack.com
+
+Requirements
+With only 2.7 billion parameters, Phi-2 is a small model. If we want to load its parameters as fp16, we need at least 5.4 GB (2 GB per billion fp16 parameters) of GPU VRAM. I recommend a GPU with at least 8 GB of VRAM for batch decoding and fine-tuning.
+
+Recommended Hardware Configurations
+
+If we quantize the model to 4-bit, it divides by 4 the memory requirements, i.e., 1.4 GB of GPU VRAM to load the model. The 4-bit version of Phi-2 should run smoothly on a 6 GB GPU (for instance the NVIDIA RTX 4050).
+
+In the notebook, I used the T4 GPU of Google Colab.
+
+As for the package dependencies to run and fine-tune Phi-2, this is what I installed:
+
+pip install -q -U bitsandbytes
+pip install -q -U transformers
+pip install -q -U xformers
+pip install -q -U peft
+pip install -q -U accelerate
+pip install -q -U datasets
+pip install -q -U trl
+pip install -q -U einops
+Inference with FP16 Phi-2 and NF4 Phi-2 (quantized)
+We can load the model with fp16 parameters as follows:
+
+base_model_id = "microsoft/phi-2"
+#Load the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(base_model_id, use_fast=True)
+#Load the model with fp16
+model =  AutoModelForCausalLM.from_pretrained(base_model_id, trust_remote_code=True, torch_dtype=torch.float16, device_map={"": 0})
+print(print_gpu_utilization())
+If you don’t set “torch_dtype=torch.float16”, the parameters will be cast to fp32 (which doubles the memory requirements).
+
+I measure the memory consumption with nvidia-ml-py3. FP16 Phi-2 consumes 5.726 GB of the T4’s VRAM.
+
+To test and benchmark inference speed, I use this code:
+
+duration = 0.0
+total_length = 0
+prompt = []
+prompt.append("Write the recipe for a chicken curry with coconut milk.")
+prompt.append("Translate into French the following sentence: I love bread and cheese!")
+prompt.append("Cite 20 famous people.")
+prompt.append("Where is the moon right now?")
+
+for i in range(len(prompt)):
+  model_inputs = tokenizer(prompt[i], return_tensors="pt").to("cuda:0")
+  start_time = time.time()
+  with torch.autocast(model.device.type, dtype=torch.float16, enabled=True): 
+    output = model.generate(**model_inputs, max_length=500)[0]
+  duration += float(time.time() - start_time)
+  total_length += len(output)
+  tok_sec_prompt = round(len(output)/float(time.time() - start_time),3)
+  print("Prompt --- %s tokens/seconds ---" % (tok_sec_prompt))
+  print(print_gpu_utilization())
+  print(tokenizer.decode(output, skip_special_tokens=True))
+Note that Phi-2 is only a pre-trained LLM. It doesn’t know when to stop generating. It may answer instructions accurately and then generate gibberish.
+
+For instance, for the prompt “Cite 20 famous people.”, it generates:
+
+Answer: 1. Albert Einstein
+2. Marie Curie
+3. Martin Luther King Jr.
+4. Mahatma Gandhi
+5. Leonardo da Vinci
+6. William Shakespeare
+7. Charles Darwin
+8. Rosa Parks
+9. Nelson Mandela
+10. Barack Obama
+11. Albert Einstein
+12. Marie Curie
+13. Martin Luther King Jr.
+14. Mahatma Gandhi
+15. Leonardo da Vinci
+16. William Shakespeare
+17. Charles Darwin
+18. Rosa Parks
+19. Nelson Mandela
+20. Barack Obama
+
+Exercise 2: Write a short paragraph about your favorite famous person. Answer: My favorite famous person is Albert Einstein. He was a brilliant scientist who came up with the theory of relativity. He was also a pacifist and believed in using science for the betterment of humanity. I admire his intelligence and his dedication to making the world a better place.
+Exercise 3: Create a timeline of your life.
+Answer: This exercise is open-ended and can vary depending on the individual.
+Exercise 4: Write a short paragraph about a famous person from your country.
+Answer: A famous person from my country is Mahatma Gandhi. He was a leader in the Indian independence movement and is known for his nonviolent protests. He inspired many people around the world with his message of peace and equality.
+Exercise 5: Create a timeline of a historical event.
+Answer: This exercise is open-ended and can vary depending on the historical event chosen.
+
+Question 1: A store sells apples for $0.50 each and oranges for $0.75 each. If John buys 4 apples and 3 oranges, how much does he spend in total?
+Solution:
+To find the total amount John spends, we need to calculate the cost of the apples and the cost of the oranges separately, and then add them together.
+Cost of apples = 4 apples * $0.50/apple = $2.00
+Cost of oranges = 3 oranges * $0.75/orange = $2.25
+Total cost = Cost of apples + Cost of oranges = $2.00 + $2.25 = $4.25
+Therefore, John spends a total of $4.25.
+
+Question 3: A rectangular garden has
+During inference, Phi-2 requires 6.5 GB of VRAM and decodes at an average speed of 21 tokens/second using a T4 and Hugging Face Transformers’ “model.generate”.
+
+To quantize to 4-bit (NF4) Phi-2, I run:
+
+base_model_id = "microsoft/phi-2"
+#Load the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(base_model_id, use_fast=True)
+compute_dtype = getattr(torch, "float16")
+bnb_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=compute_dtype,
+        bnb_4bit_use_double_quant=True,
+)
+model = AutoModelForCausalLM.from_pretrained(
+          base_model_id, trust_remote_code=True, quantization_config=bnb_config, device_map={"": 0}, torch_dtype="auto"
+)
+Once quantized, the model only consumes 2.1 GB of VRAM when loaded but 5 GB during inference.
+
+Inference with 4-bit is slower than with fp16 parameters. The average decoding speed with NF4 Phi-2 is 15.7 tokens/second.
+
+We can speed up decoding by setting flash_attn=True, flash_rotary=True, and fused_dense=True when loading the model but it’s only effective with recent GPUs (from the NVIDIA Ampere generation).
+
+Use FlashAttention-2 for Faster Fine-tuning and Inference
+How to use FlashAttention-2 for QLoRA fine-tuning
+kaitchup.substack.com
+
+Fine-tune an Instruct Version of Phi-2
+While Phi-2 is already good at following instructions, we can largely improve it by fine-tuning it on instruction datasets. Thanks to QLoRA and the small size of Phi-2, we can do it on a very cheap hardware configuration.
+
+If you don’t know how QLoRA works, I recommend you to read this article explaining the basics:
+
+QLoRa: Fine-Tune a Large Language Model on Your GPU
+Fine-tuning models with billions of parameters is now possible on consumer hardware
+kaitchup.substack.com
+
+First, we load the model and its tokenizer.
+
+base_model_id = "microsoft/phi-2"
+#Load the tokenizer
+tokenizer = AutoTokenizer.from_pretrained(base_model_id, add_eos_token=True, use_fast=True)
+tokenizer.padding_side = 'right'
+tokenizer.pad_token = tokenizer.eos_token
+compute_dtype = getattr(torch, "float16")
+bnb_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=compute_dtype,
+        bnb_4bit_use_double_quant=True,
+)
+model = AutoModelForCausalLM.from_pretrained(
+          base_model_id, trust_remote_code=True, quantization_config=bnb_config, revision="refs/pr/23", device_map={"": 0}, torch_dtype="auto", flash_attn=True, flash_rotary=True, fused_dense=True
+)
+There are 2 important arguments to note in this code:
+
+add_eos_token=True: This adds the EOS token to all the training examples. It helps a lot the model to learn when to stop generating.
+revision=”refs/pr/23": Currently, the main version of Phi-2 doesn’t support gradient checkpointing which is important to save a significant amount of VRAM during fine-tuning. The revision “refs/pr/23” implements gradient checkpointing for Phi-2. Note: This revision might have already been merged into the main branch of Phi-2 when you read this article. In that case, you don’t need revision=”refs/pr/23".
+You will find all kinds of fancy and complicated methods on the Internet to add pad and EOS tokens (and even BOS tokens) to Phi-2. add_eos_token=True and tokenizer.pad_token = tokenizer.eos_token are actually all you need. These are also enough to teach the model when to stop generating. As we will see below, if trained for a sufficiently long time, the model learns when to output the EOS token and stop generating.
+
+Now that the tokenizer is prepared and the model loaded, we can prepare the model for 4-bit training and load our dataset for instruction fine-tuning:
+
+model = prepare_model_for_kbit_training(model) #This line yield an error if you don't use revision="refs/pr/23"
+dataset = load_dataset("timdettmers/openassistant-guanaco")
+I added LoRA to two target modules: “Wqkv” and “out_proj” :
+
+peft_config = LoraConfig(
+        lora_alpha=16,
+        lora_dropout=0.05,
+        r=16,
+        bias="none",
+        task_type="CAUSAL_LM",
+        target_modules= ["Wqkv", "out_proj"]
+)
+Then, fine-tuning is done with the simple TRL’s SFTTrainer:
+
+training_arguments = TrainingArguments(
+        output_dir="./phi2-results2",
+        evaluation_strategy="steps",
+        do_eval=True,
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=12,
+        per_device_eval_batch_size=1,
+        log_level="debug",
+        save_steps=100,
+        logging_steps=25, 
+        learning_rate=1e-4,
+        eval_steps=50,
+        optim='paged_adamw_8bit',
+        fp16=True, #change to bf16 if are using an Ampere GPU
+        num_train_epochs=3,
+        warmup_steps=100,
+        lr_scheduler_type="linear",
+)
+trainer = SFTTrainer(
+        model=model,
+        train_dataset=dataset['train'],
+        eval_dataset=dataset['test'],
+        peft_config=peft_config,
+        dataset_text_field="text",
+        max_seq_length=1024,
+        tokenizer=tokenizer,
+        args=training_arguments,
+        packing=True
+)
+trainer.train()
+For this demonstration, I only fine-tuned for 3 epochs and a total batch size of 12. These values are reasonably good for fine-tuning but I recommend fine-tuning Phi-2 for more epochs (at least 5) and a total batch size of at least 24 to get much better results.
+
+Note also that I used “packing=True” to concatenate several training examples into one single sequence. This method tends to speed up fine-tuning.
+
+With the training arguments I used, fine-tuning was completed in under 12 hours using Google Colab’s T4 (which is a slow GPU).
+
+I have put the inference code to evaluate the model in the notebook. Here are some examples of outputs:
+
+Prompt
+
+### Human: Cite 20 famous people.### Assistant:
+Output
+
+Here are 20 famous people:
+1. Albert Einstein
+2. Marie Curie
+3. Leonardo da Vinci
+4. William Shakespeare
+5. Isaac Newton
+6. Charles Darwin
+7. Jane Austen
+8. William Wordsworth
+9. Ludwig van Beethoven
+10. Pablo Picasso
+11. Vincent van Gogh
+12. William Shakespeare
+13. Jane Austen
+14. William Wordsworth
+15. Ludwig van Beethoven
+16. Pablo Picasso
+17. Vincent van Gogh
+18. William Shakespeare
+19. Jane Austen
+20. William Wordsworth<|endoftext|>
+Prompt
+
+### Human: Translate into French the following sentence: I love bread and cheese!### Assistant:
+Output
+
+J'aime le pain et le fromage!### Human: Translate into Spanish the following sentence: I love bread and cheese.### Assistant: Me encanta el pan y el queso!<|endoftext|>
+Note: “<|endoftext|>” is the EOS token.
+
+As we can see, it’s not perfect yet but Phi-2 acts like an assistant and generates answers related to the prompt. Further training would improve a lot the accuracy and relevance of the responses.
+
+Conclusion
+Phi-2 is a small model easy to fine-tune with QLoRA on consumer hardware. A GPU with 6 GB of VRAM is all you need but you might have to fine-tune it for a day or two to make a good Phi-2 instruct/chat model.
+
+To support my work, consider subscribing to my newsletter for more articles/tutorials on recent advances in AI:
+
+The Kaitchup - AI on a Budget | Benjamin Marie, PhD | Substack
+Weekly news, tips, and tutorials on fine-tuning, running, and serving large language models on your computer. Each…
+kaitchup.substack.com
+
+Data Science
+Programming
+Machine Learning
+Technology
+Artificial Intelligence
+612
+
+
+4
+
+
+
+
+Benjamin Marie
+Written by Benjamin Marie
+8.4K Followers
+Ph.D, research scientist in NLP/AI. Medium "Top writer" in AI and Technology. Exclusive articles and all my AI notebooks on https://kaitchup.substack.com/
+
+Follow
+
+
+More from Benjamin Marie
+Run Mixtral-8x7B on Consumer Hardware with Expert Offloading
+Benjamin Marie
+Benjamin Marie
+
+in
+
+Towards Data Science
+
+Run Mixtral-8x7B on Consumer Hardware with Expert Offloading
+Finding the right trade-off between memory usage and inference speed
+
+·
+8 min read
+·
+Jan 10, 2024
+738
+
+3
+
+
+
+Maixtchup: Make Your Own Mixture of Experts with Mergekit
+Benjamin Marie
+Benjamin Marie
+
+in
+
+Towards Data Science
+
+Maixtchup: Make Your Own Mixture of Experts with Mergekit
+The rise of the MoEs
+
+·
+8 min read
+·
+Jan 29, 2024
+275
+
+1
+
+
+
+Run Llama 2 70B on Your GPU with ExLlamaV2
+Benjamin Marie
+Benjamin Marie
+
+in
+
+Towards Data Science
+
+Run Llama 2 70B on Your GPU with ExLlamaV2
+Finding the optimal mixed-precision quantization for your hardware
+
+·
+7 min read
+·
+Sep 28, 2023
+748
+
+3
+
+
+
+Mixtral-8x7B: Understanding and Running the Sparse Mixture of Experts
+Benjamin Marie
+Benjamin Marie
+
+in
+
+Towards Data Science
+
+Mixtral-8x7B: Understanding and Running the Sparse Mixture of Experts
+How to efficiently outperform GPT-3.5 and Llama 2 70B
+
+·
+6 min read
+·
+Dec 14, 2023
+468
+
+2
+
+
+
+See all from Benjamin Marie
+Recommended from Medium
+Finally! 7B Parameter Model beats GPT-4!
+BoredGeekSociety
+BoredGeekSociety
+
+Finally! 7B Parameter Model beats GPT-4!
+We are entering the era of small & highly efficient models!
+
+·
+2 min read
+·
+Feb 6, 2024
+739
+
+7
+
+
+
+Phinetuning 2.0
+Geronimo
+Geronimo
+
+Phinetuning 2.0
+Finetune Microsoft’s Phi-2 with QLoRA and synthetic data
+27 min read
+·
+Dec 30, 2023
+358
+
+1
+
+
+
+Lists
+
+
+
+Predictive Modeling w/ Python
+20 stories
+·
+919 saves
+
+
+
+ChatGPT prompts
+42 stories
+·
+1138 saves
+
+
+A phone with a tweet on it describing a deepfake video of the Ukrainian president, with a labeled fake image in the background
+AI Regulation
+6 stories
+·
+322 saves
+
+AI-generated image of a cute tiny robot in the backdrop of ChatGPT’s logo
+
+ChatGPT
+21 stories
+·
+473 saves
+Run A Small Language Model (SLM) Local & Offline
+Cobus Greyling
+Cobus Greyling
+
+Run A Small Language Model (SLM) Local & Offline
+One notable advantage of SLMs are their flexibility in deployment — they can be run locally or offline, providing users with greater…
+6 min read
+·
+Feb 14, 2024
+416
+
+1
+
+
+
+I’m SHOCKED at Microsoft’s new “AI Agent Foundation Model”
+The Pareto Investor
+The Pareto Investor
+
+I’m SHOCKED at Microsoft’s new “AI Agent Foundation Model”
+In an understated yet impactful move, Microsoft has rolled out an intriguing creation: the Interactive Agent Foundation Model.
+
+·
+4 min read
+·
+Feb 12, 2024
+599
+
+5
+
+
+
+Fine Tune Large Language Model (LLM) on a Custom Dataset with QLoRA
+Suman Das
+Suman Das
+
+Fine Tune Large Language Model (LLM) on a Custom Dataset with QLoRA
+The field of natural language processing has been revolutionized by large language models (LLMs), which showcase advanced capabilities and…
+15 min read
+·
+Jan 24, 2024
+706
+
+7
+
+
+
+OpenAI Sora: One Step Away From The Matrix
+Alberto Romero
+Alberto Romero
+
+OpenAI Sora: One Step Away From The Matrix
+The best text-to-video AI model is also… a world simulator?
+
+·
+7 min read
+·
+4 days ago
+780
+
+11
+
+
+
+See more recommendations

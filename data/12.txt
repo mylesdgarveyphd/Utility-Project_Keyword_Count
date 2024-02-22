@@ -1,0 +1,98 @@
+Skip to content
+Log in
+
+Topic — Microsoft
+Microsoft Research Debuts Phi-2, New Small Language Model
+Published December 13, 2023
+Image of Megan Crouse
+Written By
+Megan Crouse
+
+Table of Contents
+What is Phi-2?
+
+Phi-2 is a generative AI model with 2.7 billion-parameters used for research and development of language models.
+While large language models can reach hundreds of billions of parameters, Microsoft Research is experimenting with small language models in order to achieve similar performance at a smaller scale. On Dec. 12, Microsoft Research announced Phi-2, a 2.7 billion-parameter language model for natural language and coding. Phi-2  performed better than some larger language models, including Google’s Gemini Nano 2, on certain tests.
+
+Phi-2 is available in the Azure AI Studio model catalog. Microsoft intends for it to be used only by researchers; however, Phi-2 might ultimately lead to the development of smaller, more efficient models that can be used by businesses and can compete with massive models.
+
+Jump to:
+
+What is Phi-2?
+Phi-2 is outperforming larger models
+How to make a smaller model work like a large one
+What is Phi-2?
+Phi-2 is a language model used for research and development of other language models, commonly known as artificial intelligence.
+
+And, Phi-2 is the successor to Phi-1, a 1.3 billion parameter small language model that was released in September 2023. Phi-1 showed impressive performance on the HumanEval and MBPP benchmarks, which grade a model’s ability to code in Python. In November 2023, Microsoft Research released Phi-1.5, which added more common sense reasoning and language understanding to Phi-1. Satya Nadella announced Phi-2 during Microsoft Ignite in November 2023 (Figure A).
+
+Figure A
+
+Satya Nadella announcing Phi-2 at Microsoft Ignite 2023.
+Satya Nadella announcing Phi-2 at Microsoft Ignite 2023. Image: Microsoft
+“With its compact size, Phi-2 is an ideal playground for researchers, including for exploration around mechanistic interpretability, safety improvements or fine-tuning experimentation on a variety of tasks,” Microsoft Senior Researcher Mojan Javaheripi and Microsoft Partner Research Manager Sébastien Bubeck wrote in a blog post on Dec. 12.
+
+SEE: Windows Copilot comes with Windows 11 23H2, but you might not see it by default. Here’s how to find the AI. (TechRepublic) 
+
+“We are finding ways to make models cheaper, more efficient, and easier to train, and we feel it’s important to share what we’re learning so that the whole community benefits,” Bubeck told TechRepublic in an email. “… The size of Phi-2 makes it an ideal playground for their use, including for exploration around mechanistic interpretability, safety improvements, or fine-tuning experimentation on a variety of tasks.”
+
+Phi-2 is outperforming larger language models
+Microsoft Research says Phi-2 outperforms Mistral AI’s 7B (7 billion parameter) model and Llama-2 (which has 13 billion parameters) on standard benchmarks like Big Bench Hard and other language, math multi-step reasoning and coding tests. Microsoft Research tested Phi-2 against Google’s recently released Gemini Nano 2 and found that it performed better on the BBH, BoolQ, MBPP and MMLU tests.
+
+How to make a smaller language model work like a large one
+Microsoft Research found that smaller models can perform as well as larger ones if certain choices are made during training. One way Microsoft Research makes smaller language models perform as well as large ones is by using “textbook-quality data.”
+
+More must-read AI coverage
+Google Gemini vs. ChatGPT: Is Gemini Better Than ChatGPT?
+Copilot Cheat Sheet (Formerly Bing Chat): Complete Guide for 2024
+EU's AI Act: Europe’s New Rules for Artificial Intelligence
+Top AI Predictions for 2024 – Part 1 (Free Download)
+“Our training data mixture contains synthetic datasets specifically created to teach the model common sense reasoning and general knowledge, including science, daily activities and theory of mind, among others,” Javaheripi and Bubeck wrote. “We further augment our training corpus with carefully selected web data that is filtered based on educational value and content quality.”
+
+Another way to make a smaller language model perform as well as a large one is by scaling up. For example, the research team embedded the knowledge of the 1.3 billion parameter Phi-1.5 model into the 2.7 billion parameter Phi-2 model.
+
+“This scaled knowledge transfer not only accelerates training convergence but shows clear boost in Phi-2 benchmark scores,” wrote Javaheripi and Bubeck.
+
+Subscribe to the Microsoft Weekly Newsletter
+Be your company's Microsoft insider by reading these Windows and Office tips, tricks, and cheat sheets. Delivered Mondays and Wednesdays
+
+Email Address
+Work Email Address
+
+By signing up to receive our newsletter, you agree to our Terms of Use and Privacy Policy. You can unsubscribe at any time.
+Subscribe
+Share Article
+Also Read
+Microsoft, OpenAI Partnership Draws UK Antitrust Regulators’ Eyes
+Google Adds Gemini Pro API to AI Studio and Vertex AI
+Generative AI Policy
+What Is Artificial General Intelligence?
+Artificial Intelligence: More must-read coverage
+Image of Megan Crouse
+Megan Crouse
+Megan Crouse is a writer and editor with nearly a decade of experience in business-to-business news and feature writing. She studied English Literature and Creative Writing at Fairleigh Dickinson University.
+See all of Megan's content
+TechRepublic
+Services
+About Us
+Newsletters
+RSS Feeds
+Site Map
+Site Help & Feedback
+FAQ
+Advertise
+Do Not Sell My Information
+Careers
+Explore
+Downloads
+TechRepublic Forums
+Meet the Team
+TechRepublic Academy
+TechRepublic Premium
+Resource Library
+Photos
+Videos
+Editorial Policy
+Legal Terms
+Privacy Policy
+© 2024 TechnologyAdvice. All rights reserved.

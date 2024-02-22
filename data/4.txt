@@ -1,0 +1,322 @@
+Skip to Main Content
+the AI dream
+
+Explore the World of AI Algorithms and  Innovation
+
+Home
+About
+Contact
+
+
+All Posts
+Data Science
+statistics
+dynamic pricing
+Large language models
+More
+
+Log in / Sign up
+Writer's picture
+Nagesh Singh Chauhan
+Jan 8
+7 min read
+
+Exploring Phi-2: Microsoft's Latest Small Language Model(SLM)
+The article delves into Microsoft’s Phi-2 SLM, showcasing its fine-tuning for sentiment analysis using the Parameter-Efficient Fine-Tuning (PEFT) method and PyTorch.
+
+
+								Credits
+
+
+Introduction
+
+The substantial expansion of language models to the scale of hundreds of billions of parameters has ushered in a multitude of emerging capabilities, reshaping the landscape of natural language processing. A fundamental question persists: can similar breakthroughs be attained on a smaller scale through strategic training choices, such as data selection?
+
+Microsoft's work with the Phi models is dedicated to addressing this inquiry by training Small Language Models (SLMs) that match the performance of models with much larger scales, albeit still distant from the frontier models. The key insights driving our success with Phi-2 are twofold:
+
+
+Primarily, the quality of training data emerges as a pivotal factor influencing model performance. While this insight has been recognized for decades, we take it to an extreme by emphasizing the use of "textbook-quality" data, building upon our prior study titled "Textbooks Are All You Need." Our training data mixture incorporates synthetic datasets meticulously crafted to imbue the model with common-sense reasoning and general knowledge, spanning science, daily activities, theory of mind, and more. We enhance our training corpus by selectively incorporating web data, meticulously filtered for educational value and content quality.
+
+
+Secondly, we employ innovative techniques to scale up, commencing with our 1.3 billion parameter model, Phi-1.5, and embedding its knowledge within the 2.7 billion parameter Phi-2. This strategic knowledge transfer not only expedites training convergence but also manifests a discernible enhancement in benchmark scores for Phi-2.
+
+
+Microsoft's new generative AI model is leaner and more capable than even bigger language models.
+
+What are Small Language Models(SLMs)?
+
+SLMs are essentially smaller versions of their LLM counterparts. They have significantly fewer parameters, typically ranging from a few million to a few billion, compared to LLMs with hundreds of billions or even trillions.
+
+
+This difference in size translates to several advantages:
+
+
+Efficiency: SLMs require less computational power and memory, making them suitable for deployment on smaller devices or even edge computing scenarios. This opens up opportunities for real-world applications like on-device chatbots and personalized mobile assistants.
+
+Accessibility: With lower resource requirements, SLMs are more accessible to a broader range of developers and organizations. This democratizes AI, allowing smaller teams and individual researchers to explore the power of language models without significant infrastructure investments.
+
+Customization: SLMs are easier to fine-tune for specific domains and tasks. This enables the creation of specialized models tailored to niche applications, leading to higher performance and accuracy.
+
+
+
+								  Credits
+
+
+How do Small Language Models(SLMs) Work?
+
+Similar to Large Language Models (LLMs), SLMs undergo training on extensive datasets encompassing text and code. However, they employ various techniques to achieve a more compact size and enhance efficiency:
+
+
+Knowledge Distillation: This method involves transferring knowledge from a pre-trained LLM to a smaller model, distilling its essential capabilities without retaining the full complexity.
+
+Pruning and Quantization: Employing these techniques involves removing unnecessary components of the model and decreasing the precision of its weights. This contributes to further reducing the model's size and resource demands.
+
+Efficient Architectures: Ongoing research focuses on crafting innovative architectures explicitly tailored for SLMs, concentrating on optimizing both performance and efficiency.
+
+
+What is Phi-2?
+
+Phi-2, the successor to Phi-1.5, Microsoft's substantial language model (LLM), represents a significant advancement. With an increased parameter count of 2.7 billion and expanded training data, Phi-2 surpasses both Phi-1.5 and LLMs 25 times its size on various public benchmarks, even without alignment or fine-tuning. It stands as a pre-trained model strictly for research, with no commercial or revenue-generating intentions.
+
+
+Building on the groundwork laid by Microsoft's previous Phi models, Phi-2's pre-training involved crafting synthetic datasets tailored explicitly for common-sense reasoning and general knowledge. Unlike Phi-1.5, which relied solely on synthetic data, Phi-2's training corpus integrates meticulously curated web data, aiming to enhance robustness and competence. The comprehensive dataset spans diverse domains, encompassing science and activities, totaling 250 billion tokens. 
+
+
+
+		Satya Nadella announcing Phi-2 at Microsoft Ignite 2023. Credits
+
+
+While Microsoft hasn't released the training data, they shared insights into its sources:
+
+
+NLP synthetic data generated with GPT-3.5. 
+
+Filtered web data from Falcon RefinedWeb and SlimPajama, evaluated by GPT-4. Phi-2 remains rooted in GPT models, positioning itself as another student model of GPT-3.5/4. 
+
+
+Structurally, it adopts the Transformer-based causal model, opting for MixFormer once again.
+
+
+Throughout training, Phi-2 learned from a staggering 1.4 trillion tokens, equivalent to 5.6 training epochs, spanning 14 days and utilizing 96 A100 GPUs.
+
+
+Despite being a non-aligned pre-trained model, Phi-2 displays improved behavior concerning toxicity and bias as shown in the following results:
+
+
+
+Safety scores were computed on 13 demographics from ToxiGen. A higher score indicates the model is less likely to produce toxic sentences. Credits
+
+
+Phi-2 Evaluation
+
+In academic benchmark assessments across diverse categories, Phi-2, equipped with 2.7 billion parameters, outperforms Mistral and Llama-2 models with 7B and 13B parameters on various benchmarks. Particularly notable is its superior performance compared to the significantly larger Llama-2-70B model in multi-step reasoning tasks, such as coding and math. 
+
+
+Additionally, Phi-2 matches or exceeds the performance of the recently introduced Google Gemini Nano 2, despite its smaller size. The benchmarks cover domains like Big Bench Hard (BBH), commonsense reasoning (PIQA, WinoGrande, ARC easy and challenge, SIQA), language understanding (HellaSwag, OpenBookQA, MMLU, SQuADv2, BoolQ), math (GSM8k), and coding (HumanEval, MBPP).
+
+
+
+
+
+ 
+
+Fine-tune Phi-2 for Sentiment Analysis
+
+In this section we will see how to do inferencing Phi-2 and fine tuning it on financial news dataset using Huggingface transformers package. 
+
+
+All the codes are present in this notebook. 
+
+
+Install all the required packages: 
+
+!pip install -q -U torch=='2.1.0'
+!pip install -q -U accelerate=='0.25.0' peft=='0.7.1' bitsandbytes=='0.41.3.post2' trl=='0.7.4'
+!pip install -q -U transformers einops
+
+Import all the required libraries: 
+
+
+
+
+Let us first see how to do Inferencing with Phi-2
+
+
+
+
+Output: 
+
+
+
+Next, lets get started with Sentiment Analysis. 
+
+
+
+						Sentiment Analysis. Credits
+
+
+Dataset: https://www.kaggle.com/datasets/ankurzing/sentiment-analysis-for-financial-news
+
+
+
+
+Next perform below steps:
+
+
+Divides the dataset into training and test sets, comprising 300 samples each. The stratified split ensures that both sets encompass a balanced representation of positive, neutral, and negative sentiments.
+
+Utilizes a replicable shuffling order for the training data (random_state=10).
+
+Transforms the text within the training and test datasets into prompts tailored for Phi-2. The training prompts include the desired answers for fine-tuning the model.
+
+The remaining examples not assigned to the training or test sets, reserved for reporting purposes during training (though not used for early stopping), are treated as evaluation data. To ensure a 50/50/50 sample, negative instances are repeated as they are scarce.
+
+Wraps the training and evaluation data using the class provided by Hugging Face.
+
+
+
+
+
+
+Subsequently, we establish a function for evaluating outcomes from our sentiment model fine-tuning. The function executes the following tasks:
+
+
+Transforms sentiment labels into a numerical representation: 2 for positive, 1 for neutral, and 0 for negative.
+
+Computes the model's accuracy on the test data.
+
+Produces an accuracy report for each sentiment label.
+
+Compiles a classification report for the model.
+
+Constructs a confusion matrix for the model.
+
+
+
+Now the attention is directed toward the model, a 7b-v0.1-hf (denoting 7 billion parameters, version 0.1, in the HuggingFace compatible format), encompassing loading from Kaggle models and quantization.
+
+
+For model loading and quantization:
+
+The code initiates the loading of the Phi-2 language model from the Hugging Face Hub.
+
+Subsequently, it acquires the float16 data type from the torch library, designated for computations.
+
+The code then constructs a BitsAndBytesConfig object, configuring settings such as loading the model weights in 4-bit format, utilizing the "nf4" quantization type (4-bit NormalFloat), employing float16 data type for computations, and deciding against using double quantization for reduced memory footprint.
+
+Proceeding, the code creates an AutoModelForCausalLM object from the pre-trained Phi-2 language model, employing the previously defined BitsAndBytesConfig object for quantization.
+
+Following this, the code disables caching for the model and establishes the pre-training token probability to be 1.
+
+
+Regarding tokenizer loading:
+
+The code commences by loading the tokenizer for the Phi-2 language model.
+
+It then designates the padding token to be the end-of-sequence (EOS) token.
+
+Lastly, the code sets the padding side to be "left," indicating that input sequences will be padded on the left side.
+
+
+
+
+Write the predict function:
+
+
+
+
+At this point, we are ready to test the Phi-2 model and see how it performs on our problem without any fine-tuning. This allows us to get insights on the model itself and establish a baseline.
+
+
+The results: With overall accuracy of 34% and low f1 scores. 
+
+
+
+
+Now, we prepare for the fine-tuning process. We configure and initialize a Simple Fine-tuning Trainer (SFTTrainer) tailored for training large language models using the Parameter-Efficient Fine-Tuning (PEFT) method. 
+
+
+Parameter-efficient Fine-tuning (PEFT) is a technique used in Natural Language Processing (NLP) to improve the performance of pre-trained language models on specific downstream tasks. It involves reusing the pre-trained model’s parameters and fine-tuning them on a smaller dataset, which saves computational resources and time compared to training the entire model from scratch.
+
+This approach aims to save time by operating on a reduced number of parameters compared to the model's overall size. The PEFT method focuses on refining a limited set of additional model parameters while maintaining the majority of the pre-trained LLM parameters fixed. This not only significantly reduces computational and storage expenses but also addresses the challenge of catastrophic forgetting often encountered during complete fine-tuning of LLMs.
+
+
+Some parameters in the PEFTConfig object include:
+
+
+lora_alpha: Learning rate for the LoRA update matrices.
+
+lora_dropout: Dropout probability for the LoRA update matrices.
+
+r: Rank of the LoRA update matrices.
+
+bias: Type of bias to use (none, additive, or learned).
+
+task_type: Type of task the model is being trained for, with possible values CAUSAL_LM and MASKED_LM.
+
+
+
+Let us do predictions on our fine tuned model. 
+
+
+
+
+The accuracy has shown a remarkable improvement, soaring from 34% to an impressive 85%, accompanied by substantially higher F1 scores. Quite noteworthy, don't you think?
+
+
+Conclusion
+
+In conclusion, this article demonstrated how to leverage Parameter-Efficient Fine-Tuning (PEFT) to effectively adapt Microsoft's powerful Phi-2 language model for sentiment analysis. By only updating the classification layer and a small fraction of Phi-2's parameters, we can achieve strong performance on downstream tasks using just modest compute resources.
+
+
+Fine-tuning huge pre-trained models like Phi-2 enables us to tap into the vast linguistic capabilities learned during pre-training. PEFT provides an efficient methodology to transfer this knowledge to specialized applications using a fraction of training samples. Our PyTorch implementation showcases how this can be achieved in just a few lines of code by freezing the base model and training task-specific classifier layers.
+
+
+The benefits of transfer learning via fine-tuning are clear - better performance compared to training from scratch, lower data requirements, and faster training. As models continue to scale in size, methods like PEFT will become increasingly crucial to making them practical for real-world NLP applications. By building on top of general-purpose LLMs like Phi-2, we can rapidly develop performant and accurate AI systems tailored to specific organizational needs.
+
+
+References
+
+https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/
+
+https://medium.com/@bnjmn_marie/phi-2-a-small-model-easy-to-fine-tune-on-your-gpu-06db49949ff1
+
+https://www.kaggle.com/datasets/ankurzing/sentiment-analysis-for-financial-news
+
+https://medium.com/@nageshmashette32/small-language-models-slms-305597c9edf2
+
+
+			Thanks for reading !!!
+
+artificial intelligenceAIlarge language models
+
+Large language models
+2,233 views
+0 comments
+4 likes. Post not marked as liked
+4
+Recent Posts
+See All
+Breaking Boundaries with Generative AI: A Closer Look at Large Language Models
+
+405
+0
+12 likes. Post not marked as liked
+12
+Reinforcement Learning from Human Feedback (RLHF)
+
+925
+0
+5 likes. Post not marked as liked
+5
+Retrieval Augmented Generation (RAG) in Large Language Model(LLMs)
+
+585
+0
+3 likes. Post not marked as liked
+3
+
+
+Follow
+
+©2020 by The AI Dream.

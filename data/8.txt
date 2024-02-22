@@ -1,0 +1,116 @@
+Skip to content
+THE DECODERArtificial Intelligence: News, Business, Research
+DE
+AI in practice
+Jan 6, 2024
+Update
+Microsoft's mini LLM Phi-2 is now open source and allegedly better than Google Gemini Nano
+Microsoft
+Microsoft's mini LLM Phi-2 is now open source and allegedly better than Google Gemini Nano
+Content
+summary
+Summary
+Update
+Added information about MIT license
+New benchmarks added
+Update from January 6, 2024:
+
+Microsoft is releasing Phi-2 under the MIT Open-Source License. The MIT license is a permissive license that permits commercial use, distribution, modification, and private use of the licensed software. The only condition is that you retain the copyright and license notices.
+
+The license also grants permission to use, copy, modify, merge, publish, distribute, sublicense and/or sell copies of the software. However, the software, in this case the AI model, is provided "as is" without any warranty or liability on the part of the authors or copyright holders.
+
+Updated December 12, 2023:
+
+Ad
+
+Phi-2 is Microsoft's smallest language model. New benchmarks from the company show it beating Google's Gemini Nano.
+
+Microsoft has released more details on Phi-2, including detailed benchmarks comparing the 2.7 billion parameter model with Llama-2, Mistral 7B and Google's Gemini Nano.
+
+
+Bild: Microsoft
+In comparison with Google's smallest language model of the Gemini family, Phi-2 shows better performance in all benchmarks presented by Microsoft.
+
+
+Bild: Microsoft
+Microsoft has also carried out extensive tests with frequently used prompts. The conclusion: "We observed a behavior in accordance with the expectation we had given the benchmark results."
+
+Gemini Nano is to be used on end devices such as the Pixel 8.
+
+Recommendation
+AI in practice
+How ChatGPT data poisons open-source models
+How ChatGPT data poisons open-source models
+Original article from 16 November 2023
+
+In June, Microsoft researchers presented Phi-1, a transformer-based language model optimized for code with only 1.3 billion parameters. The model was trained exclusively on high-quality data and outperformed models up to ten times larger in benchmarks.
+
+Phi-1.5 followed a few months later, also with 1.3 billion parameters and trained on additional data consisting of various AI-generated texts. Phi-1.5 can compose poems, write emails and stories, and summarize texts. One variant can also analyze images. In benchmarks on common sense, language comprehension, and reasoning, the model was in some areas able to keep up with models with up to 10 billion parameters.
+
+Microsoft has now announced Phi-2, which with 2.7 billion parameters is twice as large, but still tiny compared to other language models. Compared to Phi-1.5, the model shows dramatic improvements in logical reasoning and safety, according to the company. With the right fine-tuning and customization, the small language model is a powerful tool for cloud and edge applications, the company said.
+
+Ad
+
+Microsoft's Phi-2 shows improvements in math and coding
+The company has not yet published any further details about the model, however, Sebastien Bubeck, head of the Machine Learning Foundations Group at Microsoft Research, published a screenshot on Twitter of the "MT-Bench" benchmark, which attempts to test the real capabilities of large - and small - language models with powerful language models such as GPT-4.
+
+
+MT-Bench results from Phi-2. | Image: Sebastien Bubeck
+According to the results, Phi-2 outperforms Meta's Llama-2-7B model in some areas. A chat version of Phi-2 is also in the pipeline and may address some of the model's existing weaknesses in these areas.
+
+Microsoft announces "Models as a Service"
+Phi-2 and Phi-1.5 are now available in the Azure AI model catalog, along with Stable Diffusion, Falcon, CLIP, Whisper V3, BLIP, and SAM. Microsoft is also adding Code Llama and Nemotron from Meta and Nvidia.
+
+Microsoft also announced "Models as a Service": "Pro developers will soon be able to easily integrate the latest AI models such as Llama 2 from Meta, Command from Cohere, Jais from G42, and premium models from Mistral as an API endpoint to their applications. They can also fine-tune these models with their own data without needing to worry about setting up and managing the GPU infrastructure, helping eliminate the complexity of provisioning resources and managing hosting."
+
+Share
+You have read 2 of our articles this month. Thank you for your interest!
+Support our independent, free-access reporting. Any contribution helps and secures our future. Support now:
+Bank transfer
+Summary
+Microsoft has announced Phi-2, a new small language model with 2.7 billion parameters that has "dramatic improvements" over its predecessor Phi-1.5 in the areas of reasoning and security.
+According to Microsoft, Phi-2 outperforms Google's Gemini Nano, as well as some larger models from Meta's Llama family.
+Microsoft has made Phi-2 and Phi-1.5 available in the Azure AI Model Catalog and is announcing "Models as a Service", allowing developers to access the latest AI models.
+Sources
+Microsoft
+X
+
+Maximilian Schreiner
+Max is managing editor at THE DECODER. As a trained philosopher, he deals with consciousness, AI, and the question of whether machines can really think or just pretend to.
+Profile
+E-Mail
+AI in practice
+Jan 24, 2024
+Generative AI is expensive, and Microsoft needs to cut costs
+Generative AI is expensive, and Microsoft needs to cut costs
+AI in practice
+Dec 28, 2023
+Microsoft uses AI to speed up small nuclear reactor approvals for AI training data centers
+AI in practice
+Dec 5, 2023
+Microsoft Copilot gets free update to GPT-4-Turbo
+Microsoft Copilot gets free update to GPT-4-Turbo
+
+Load more
+Google News
+Join our community
+Join the DECODER community on Discord, Reddit or Twitter - we can't wait to meet you.
+To top
+The Decoder
+About
+Advertise
+Publish with us
+Topics
+AI research
+AI in practice
+AI and society
+THE DECODER Newsletter
+The most important AI news straight to your inbox.
+✓ Weekly
+✓ Free
+✓ Cancel at any time
+E-Mail *
+E-Mail *
+The Decoder by DEEP CONTENT | ALL RIGHTS RESERVED 2023
+Privacy Policy | Privacy-Manager | Legal Notice | Revoke
+DE
